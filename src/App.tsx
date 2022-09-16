@@ -1,5 +1,12 @@
+import { Route, Switch } from 'react-router-dom';
+import MainPage from './pages/MainPage';
+
 function App() {
-  return <div>기훈이의 쇼핑몰</div>;
+  return (
+    <Switch>
+      <Route path='/' exact component={MainPage} />
+    </Switch>
+  );
 }
 
 export default App;
