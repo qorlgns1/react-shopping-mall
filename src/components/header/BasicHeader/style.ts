@@ -2,9 +2,11 @@ import styled from 'styled-components';
 import SearchBar from '../../SearchBar';
 
 const Wrapper = styled.div`
-  margin: 22px auto;
+  margin: 0 auto;
+  padding: 22px 0;
   display: flex;
   justify-content: space-between;
+  box-shadow: 0 4px 5px -4px rgba(0, 0, 0, 0.1);
 `;
 
 const MainLogo = styled.img`
