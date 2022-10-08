@@ -65,7 +65,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const AppFixedWrap = styled.div`
-  width: 900px;
+  width: 1280px;
   margin: 0 auto;
 `;
 
