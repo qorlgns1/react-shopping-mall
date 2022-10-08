@@ -1,0 +1,242 @@
+import React from 'react';
+import Item from './Item';
+import { ItemType } from './Item/style';
+import { Wrapper } from './style';
+
+const itemList = [
+  {
+    product_id: 68,
+    created_at: '2022-10-07T10:52:06.031008',
+    updated_at: '2022-10-07T10:52:06.031041',
+    product_name: '딥다이브',
+    image:
+      'https://openmarket.weniv.co.kr/media/products/2022/10/07/%EB%94%A5%EB%8B%A4%EC%9D%B4%EB%B8%8C.jfif',
+    price: 20000,
+    shipping_method: 'DELIVERY',
+    shipping_fee: 3000,
+    stock: 88,
+    product_info: '테스트',
+    seller: 145,
+    store_name: '레오네 상점',
+  },
+  {
+    product_id: 67,
+    created_at: '2022-10-07T10:48:48.517057',
+    updated_at: '2022-10-07T23:28:40.461050',
+    product_name: '채소',
+    image:
+      'https://openmarket.weniv.co.kr/media/products/2022/10/07/market-3351156_1280.jpg',
+    price: 3000,
+    shipping_method: 'DELIVERY',
+    shipping_fee: 3000,
+    stock: 220,
+    product_info: '테스트',
+    seller: 145,
+    store_name: '레오네 상점',
+  },
+  {
+    product_id: 66,
+    created_at: '2022-10-07T10:48:09.248976',
+    updated_at: '2022-10-07T10:48:09.249008',
+    product_name: '캠핑카',
+    image:
+      'https://openmarket.weniv.co.kr/media/products/2022/10/07/rv-2788677_1280.jpg',
+    price: 80000000,
+    shipping_method: 'DELIVERY',
+    shipping_fee: 500000,
+    stock: 44,
+    product_info: '테스트',
+    seller: 145,
+    store_name: '레오네 상점',
+  },
+  {
+    product_id: 65,
+    created_at: '2022-10-07T10:47:47.873542',
+    updated_at: '2022-10-07T10:47:47.873575',
+    product_name: '원두',
+    image:
+      'https://openmarket.weniv.co.kr/media/products/2022/10/07/still-life-2366084_1280.jpg',
+    price: 17000,
+    shipping_method: 'PARCEL',
+    shipping_fee: 2500,
+    stock: 66,
+    product_info: '테스트',
+    seller: 145,
+    store_name: '레오네 상점',
+  },
+  {
+    product_id: 64,
+    created_at: '2022-10-07T10:47:17.005244',
+    updated_at: '2022-10-07T10:47:17.005283',
+    product_name: '고기고기',
+    image:
+      'https://openmarket.weniv.co.kr/media/products/2022/10/07/meat-123668_1280.jpg',
+    price: 20000,
+    shipping_method: 'PARCEL',
+    shipping_fee: 3000,
+    stock: 60,
+    product_info: '테스트',
+    seller: 145,
+    store_name: '레오네 상점',
+  },
+  {
+    product_id: 63,
+    created_at: '2022-10-07T10:46:58.183565',
+    updated_at: '2022-10-07T10:46:58.183599',
+    product_name: '빵',
+    image:
+      'https://openmarket.weniv.co.kr/media/products/2022/10/07/bread-basket-2705179_1280.png',
+    price: 10000,
+    shipping_method: 'PARCEL',
+    shipping_fee: 3000,
+    stock: 34,
+    product_info: '테스트',
+    seller: 145,
+    store_name: '레오네 상점',
+  },
+  {
+    product_id: 62,
+    created_at: '2022-10-07T10:46:45.721951',
+    updated_at: '2022-10-07T10:46:45.721984',
+    product_name: '고기',
+    image:
+      'https://openmarket.weniv.co.kr/media/products/2022/10/07/asparagus-2169305_1280.jpg',
+    price: 60000,
+    shipping_method: 'DELIVERY',
+    shipping_fee: 3500,
+    stock: 20,
+    product_info: '테스트',
+    seller: 145,
+    store_name: '레오네 상점',
+  },
+  {
+    product_id: 61,
+    created_at: '2022-10-07T10:46:15.322367',
+    updated_at: '2022-10-07T10:46:15.322400',
+    product_name: '텐트',
+    image:
+      'https://openmarket.weniv.co.kr/media/products/2022/10/07/tent-5441144_1280.jpg',
+    price: 300000,
+    shipping_method: 'DELIVERY',
+    shipping_fee: 30000,
+    stock: 5,
+    product_info: '테스트',
+    seller: 145,
+    store_name: '레오네 상점',
+  },
+  {
+    product_id: 60,
+    created_at: '2022-10-07T10:45:56.344199',
+    updated_at: '2022-10-07T10:45:56.344231',
+    product_name: '케이크',
+    image:
+      'https://openmarket.weniv.co.kr/media/products/2022/10/07/tart-2002839_1280.jpg',
+    price: 5000,
+    shipping_method: 'DELIVERY',
+    shipping_fee: 2000,
+    stock: 32,
+    product_info: '테스트',
+    seller: 145,
+    store_name: '레오네 상점',
+  },
+  {
+    product_id: 59,
+    created_at: '2022-10-07T10:45:38.795720',
+    updated_at: '2022-10-07T10:45:38.795752',
+    product_name: '커피',
+    image:
+      'https://openmarket.weniv.co.kr/media/products/2022/10/07/coffee-2306471_1280.jpg',
+    price: 5000,
+    shipping_method: 'PARCEL',
+    shipping_fee: 2000,
+    stock: 80,
+    product_info: '테스트',
+    seller: 145,
+    store_name: '레오네 상점',
+  },
+  {
+    product_id: 58,
+    created_at: '2022-10-07T10:45:22.210507',
+    updated_at: '2022-10-07T10:45:22.210541',
+    product_name: '맛있는고기',
+    image:
+      'https://openmarket.weniv.co.kr/media/products/2022/10/07/barbecue-1239434_1280.jpg',
+    price: 30000,
+    shipping_method: 'DELIVERY',
+    shipping_fee: 2000,
+    stock: 58,
+    product_info: '테스트',
+    seller: 145,
+    store_name: '레오네 상점',
+  },
+  {
+    product_id: 56,
+    created_at: '2022-10-07T10:35:50.187701',
+    updated_at: '2022-10-07T10:35:50.187734',
+    product_name: '타프',
+    image:
+      'https://openmarket.weniv.co.kr/media/products/2022/10/07/KakaoTalk_20221006_165606993.jpg',
+    price: 300000,
+    shipping_method: 'DELIVERY',
+    shipping_fee: 50000,
+    stock: 22,
+    product_info: '타프',
+    seller: 5,
+    store_name: "seller1's store",
+  },
+  {
+    product_id: 55,
+    created_at: '2022-10-07T10:35:29.673261',
+    updated_at: '2022-10-07T10:35:29.673294',
+    product_name: '레오',
+    image:
+      'https://openmarket.weniv.co.kr/media/products/2022/10/07/KakaoTalk_20221006_165647384.jpg',
+    price: 700000,
+    shipping_method: 'DELIVERY',
+    shipping_fee: 50000,
+    stock: 22,
+    product_info: '레오',
+    seller: 5,
+    store_name: "seller1's store",
+  },
+  {
+    product_id: 53,
+    created_at: '2022-10-07T10:34:23.679444',
+    updated_at: '2022-10-07T10:34:23.679493',
+    product_name: '장어',
+    image:
+      'https://openmarket.weniv.co.kr/media/products/2022/10/07/KakaoTalk_20221006_165526450.jpg',
+    price: 200000,
+    shipping_method: 'PARCEL',
+    shipping_fee: 20000,
+    stock: 55,
+    product_info: '장어',
+    seller: 5,
+    store_name: "seller1's store",
+  },
+  {
+    product_id: 52,
+    created_at: '2022-10-06T16:48:52.784762',
+    updated_at: '2022-10-06T16:48:52.784790',
+    product_name: '겨울이',
+    image:
+      'https://openmarket.weniv.co.kr/media/products/2022/10/06/KakaoTalk_20221006_164544898.jpg',
+    price: 999999999,
+    shipping_method: 'DELIVERY',
+    shipping_fee: 1000,
+    stock: 1,
+    product_info: '테스트',
+    seller: 145,
+    store_name: '레오네 상점',
+  },
+];
+
+export default function ItemList() {
+  return (
+    <Wrapper>
+      {itemList.map((itemInfo: ItemType) => (
+        <Item key={itemInfo.product_id} itemInfo={itemInfo} />
+      ))}
+    </Wrapper>
+  );
+}
