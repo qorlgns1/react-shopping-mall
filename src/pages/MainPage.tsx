@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { axiosGetItemList } from '../apis/itemApi';
 import Carousel from '../components/Carousel';
@@ -7,29 +6,35 @@ import ItemList from '../components/ItemList';
 
 export default function Main() {
   const [isLoading, setIsLoading] = useState(false);
-  const [itemList, setItemList] = useState([]);
+  const [itemList, setItemList] = useState<[]>([]);
+
+  const getItemList = async () => {
+    try {
+      const data = await axiosGetItemList();
+      setItemList(data);
+      setIsLoading(true);
+    } catch (err) {
+      setItemList([]);
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    axiosGetItemList()
-      .then((data) => {
-        setIsLoading(true);
-        setItemList(data);
-      })
-      .catch(() => {
-        setIsLoading(false);
-        setItemList([]);
-      });
-  }, []);
+    // 스켈레톤 UI 테스트용
+    // new Promise(() => {
+    //   setTimeout(() => {
+    // getItemList();
+    //   }, 3000);
+    // });
 
-  if (!isLoading) {
-    return null;
-  }
+    getItemList();
+  }, []);
 
   return (
     <>
       <BasicHeader />
       <Carousel />
-      <ItemList itemList={itemList} />
+      <ItemList isLoading={isLoading} itemList={itemList} />
     </>
   );
 }
