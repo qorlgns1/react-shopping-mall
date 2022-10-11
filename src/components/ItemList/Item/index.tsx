@@ -14,7 +14,7 @@ export default function Item({ itemInfo }: any) {
       <ItemStoreName>{itemInfo.store_name}</ItemStoreName>
       <ItemProductName>{itemInfo.product_name}</ItemProductName>
       <div>
-        <ItemPrice>{itemInfo.price}</ItemPrice>
+        <ItemPrice>{itemInfo.price.toLocaleString()}</ItemPrice>
         <ItemPriceSuffix>원</ItemPriceSuffix>
       </div>
     </Wrapper>
