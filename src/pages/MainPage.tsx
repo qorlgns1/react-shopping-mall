@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { axiosGetItemList } from '../apis/itemApi';
 import Carousel from '../components/Carousel';
 import BasicHeader from '../components/header/BasicHeader';
 import ItemList from '../components/ItemList';
@@ -7,17 +8,16 @@ import ItemList from '../components/ItemList';
 export default function Main() {
   const [isLoading, setIsLoading] = useState(false);
   const [itemList, setItemList] = useState([]);
+
   useEffect(() => {
-    axios
-      .get('https://openmarket.weniv.co.kr/products/')
-      .then(function ({ data }) {
+    axiosGetItemList()
+      .then((data) => {
         setIsLoading(true);
-        const { results } = data;
-        setItemList(results);
+        setItemList(data);
       })
-      .catch(function (error) {
+      .catch(() => {
         setIsLoading(false);
-        console.log(error);
+        setItemList([]);
       });
   }, []);
 
