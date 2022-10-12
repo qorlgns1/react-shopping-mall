@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { axiosGetItemList } from '../apis/itemApi';
 import Carousel from '../components/Carousel';
+import Footer from '../components/common/Footer';
 import BasicHeader from '../components/header/BasicHeader';
 import ItemList from '../components/ItemList';
 
@@ -35,6 +36,7 @@ export default function Main() {
       <BasicHeader />
       <Carousel />
       <ItemList isLoading={isLoading} itemList={itemList} />
+      <Footer />
     </>
   );
 }
