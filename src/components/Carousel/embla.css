@@ -2,11 +2,8 @@
   position: relative;
   background-color: #f7f7f7;
   padding: 20px;
-  /* max-width: 670px; */
-  margin-left: auto;
-  margin-right: auto;
+  margin: 3px auto 0;
   height: 500px;
-  z-index: -1;
 }
 
 .embla__viewport {

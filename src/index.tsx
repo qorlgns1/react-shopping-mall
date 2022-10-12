@@ -64,11 +64,6 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const AppFixedWrap = styled.div`
-  width: 1280px;
-  margin: 0 auto;
-`;
-
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
@@ -76,9 +71,7 @@ root.render(
   <>
     <GlobalStyle />
     <BrowserRouter>
-      <AppFixedWrap>
-        <App />
-      </AppFixedWrap>
+      <App />
     </BrowserRouter>
   </>,
 );

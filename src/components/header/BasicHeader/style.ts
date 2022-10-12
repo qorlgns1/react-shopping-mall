@@ -4,6 +4,7 @@ import SearchBar from '../../SearchBar';
 const Wrapper = styled.div`
   margin: 0 auto;
   padding: 22px 0;
+  max-width: 1280px;
   display: flex;
   justify-content: space-between;
   box-shadow: 0 4px 5px -4px rgba(0, 0, 0, 0.1);
