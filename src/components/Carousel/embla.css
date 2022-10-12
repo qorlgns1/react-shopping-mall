@@ -1,7 +1,6 @@
 .embla {
   position: relative;
   background-color: #f7f7f7;
-  padding: 20px;
   margin: 3px auto 0;
   height: 500px;
 }
@@ -33,7 +32,7 @@
   flex: 0 0 100%;
   max-width: 100%;
   margin-left: 10px;
-  height: 460px;
+  height: 497px;
 }
 
 .embla__slide__img {
