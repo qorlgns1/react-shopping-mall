@@ -7,6 +7,12 @@ const Wrapper = styled.ul`
   display: flex;
   flex-wrap: wrap;
   gap: 70px;
+  justify-content: space-evenly;
+
+  @media screen and (max-width: 767px) {
+    padding: 40px 0 90px;
+    gap: 10px;
+  }
 `;
 
 export { Wrapper };

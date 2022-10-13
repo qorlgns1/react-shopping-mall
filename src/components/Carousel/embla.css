@@ -76,3 +76,17 @@
 .embla__button--next {
   right: 27px;
 }
+
+@media screen and (max-width: 767px) {
+  .embla {
+    max-height: 300px;
+  }
+
+  .embla__slide {
+    max-height: 300px;
+  }
+
+  .embla__container {
+    align-items: center;
+  }
+}

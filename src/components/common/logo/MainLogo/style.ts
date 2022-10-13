@@ -8,6 +8,10 @@ const LogoImg = styled.img<LogoImgSize>`
   width: ${({ size }) => size.width};
   height: ${({ size }) => size.height};
   margin-top: 3px;
+
+  @media screen and (max-width: 767px) {
+    margin: 0 auto;
+  }
 `;
 
 export { LogoImg };

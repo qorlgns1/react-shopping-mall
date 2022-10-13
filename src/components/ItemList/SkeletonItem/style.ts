@@ -13,12 +13,16 @@ const loading = keyframes`
 const Wrapper = styled.li`
   display: flex;
   flex-direction: column;
+  width: 380px;
   position: relative;
+
+  @media screen and (max-width: 767px) {
+    width: 180px;
+  }
 `;
 
 const ItemImage = styled.div`
   margin-bottom: 16px;
-  width: 380px;
   height: 380px;
   border: 1px solid #c4c4c4;
   border-radius: 10px;
@@ -36,12 +40,16 @@ const ItemImage = styled.div`
     background: linear-gradient(to right, #f2f2f2, #ddd, #f2f2f2);
     animation: ${loading} 2s infinite linear;
   }
+
+  @media screen and (max-width: 767px) {
+    height: 180px;
+  }
 `;
 
 const ItemStoreName = styled.span`
   margin-bottom: 10px;
   width: 70%;
-  height: 22px;
+  height: 16px;
   background: #f2f2f2;
   position: relative;
   overflow: hidden;
@@ -60,7 +68,7 @@ const ItemStoreName = styled.span`
 
 const ItemProductName = styled.div`
   margin-bottom: 10px;
-  height: 22px;
+  height: 18px;
   width: 70%;
   background: #f2f2f2;
   position: relative;
@@ -79,7 +87,7 @@ const ItemProductName = styled.div`
 `;
 
 const ItemPrice = styled.div`
-  height: 30px;
+  height: 24px;
   color: #000000;
   display: inline-block;
   width: 40%;
@@ -97,23 +105,10 @@ const ItemPrice = styled.div`
     background: linear-gradient(to right, #f2f2f2, #ddd, #f2f2f2);
     animation: ${loading} 2s infinite linear;
   }
+
+  @media screen and (max-width: 767px) {
+    height: 20px;
+  }
 `;
 
-const ItemPriceSuffix = styled.span`
-  padding-left: 2px;
-  font-family: 'Spoqa Han Sans Neo';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
-  color: #000000;
-`;
-
-export {
-  Wrapper,
-  ItemImage,
-  ItemStoreName,
-  ItemProductName,
-  ItemPrice,
-  ItemPriceSuffix,
-};
+export { Wrapper, ItemImage, ItemStoreName, ItemProductName, ItemPrice };

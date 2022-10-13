@@ -8,6 +8,11 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   box-shadow: 0 4px 5px -4px rgba(0, 0, 0, 0.1);
+
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+    gap: 10px;
+  }
 `;
 
 const MainLogo = styled.img`
@@ -17,7 +22,14 @@ const MainLogo = styled.img`
 `;
 
 const CustomSearchBar = styled(SearchBar)`
-  margin-left: -200px;
+  width: 400px;
+  margin: 0 auto 0 30px;
+
+  @media screen and (max-width: 767px) {
+    margin: 0;
+    padding: 0 10px;
+    width: 100%;
+  }
 `;
 
 const PageMoveButtons = styled.ul`

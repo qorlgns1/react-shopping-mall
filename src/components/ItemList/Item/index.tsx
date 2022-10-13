@@ -7,9 +7,9 @@ import {
   Wrapper,
 } from './style';
 
-export default function Item({ itemInfo }: any) {
+export default function Item({ itemInfo, style }: any) {
   return (
-    <Wrapper>
+    <Wrapper style={style}>
       <ItemImage src={itemInfo.image} alt={`${itemInfo.product_name} 이미지`} />
       <ItemStoreName>{itemInfo.store_name}</ItemStoreName>
       <ItemProductName>{itemInfo.product_name}</ItemProductName>

@@ -18,53 +18,63 @@ export interface ItemType {
 const Wrapper = styled.li`
   display: flex;
   flex-direction: column;
+  width: 380px;
+  font-family: 'Spoqa Han Sans Neo';
+  font-style: normal;
+  font-weight: 400;
+
+  @media screen and (max-width: 767px) {
+    width: 180px;
+  }
 `;
 
 const ItemImage = styled.img`
   margin-bottom: 16px;
-  width: 380px;
   height: 380px;
   border: 1px solid #c4c4c4;
   border-radius: 10px;
+
+  @media screen and (max-width: 767px) {
+    height: 180px;
+  }
 `;
 
 const ItemStoreName = styled.span`
   padding-bottom: 10px;
-  font-family: 'Spoqa Han Sans Neo';
-  font-style: normal;
-  font-weight: 400;
   font-size: 16px;
-  line-height: 22px;
   color: #767676;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 const ItemProductName = styled.span`
   padding-bottom: 10px;
-  font-family: 'Spoqa Han Sans Neo';
-  font-style: normal;
-  font-weight: 400;
   font-size: 18px;
-  line-height: 22px;
-  color: #000000;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 const ItemPrice = styled.span`
-  font-family: 'Spoqa Han Sans Neo';
-  font-style: normal;
   font-weight: 700;
   font-size: 24px;
-  line-height: 30px;
-  color: #000000;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  @media screen and (max-width: 767px) {
+    font-size: 20px;
+  }
 `;
 
 const ItemPriceSuffix = styled.span`
   padding-left: 2px;
-  font-family: 'Spoqa Han Sans Neo';
-  font-style: normal;
-  font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  color: #000000;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 export {

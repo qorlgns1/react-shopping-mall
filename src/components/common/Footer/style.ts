@@ -1,15 +1,18 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  height: 298px;
   background-color: #f2f2f2;
   padding: 54px 0 63px;
-  min-width: 630px;
+
+  @media screen and (max-width: 767px) {
+    padding: 27px 0 31px;
+  }
 `;
 
 const Layout = styled.footer`
   margin: 0 auto;
   max-width: 1280px;
+  padding: 0 10px;
 `;
 
 const WrapperCorpAndSocial = styled.div`
@@ -25,17 +28,39 @@ const WrapperCorpAndSocial = styled.div`
     bottom: -22px;
     border-bottom: 1px solid #c4c4c4;
   }
+
+  @media screen and (max-width: 767px) {
+    align-items: center;
+  }
 `;
 
 const ListCorp = styled.ul`
   padding-top: 12px;
   display: flex;
+
+  @media screen and (max-width: 767px) {
+    flex-wrap: wrap;
+    max-width: 210px;
+    justify-content: center;
+  }
 `;
 
 const ItemCorp = styled.li`
-  & + &::before {
-    content: '|';
-    padding: 0 14px;
+  @media screen and (max-width: 767px) {
+    margin-bottom: 5px;
+    &:not(:nth-of-type(3n)) {
+      &::after {
+        content: '|';
+        padding: 0 7px;
+      }
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    & + &::before {
+      content: '|';
+      padding: 0 14px;
+    }
   }
 `;
 

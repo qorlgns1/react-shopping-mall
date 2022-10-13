@@ -24,8 +24,8 @@ export default function Main() {
     // 스켈레톤 UI 테스트용
     // new Promise(() => {
     //   setTimeout(() => {
-    // getItemList();
-    //   }, 3000);
+    //     getItemList();
+    //   }, 2000);
     // });
 
     getItemList();
