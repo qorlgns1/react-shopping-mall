@@ -7,6 +7,7 @@ const Wrapper = styled.div`
   max-width: 1280px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   box-shadow: 0 4px 5px -4px rgba(0, 0, 0, 0.1);
 
   @media screen and (max-width: 767px) {
