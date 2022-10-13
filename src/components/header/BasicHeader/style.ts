@@ -3,7 +3,7 @@ import SearchBar from '../../SearchBar';
 
 const Wrapper = styled.div`
   margin: 0 auto;
-  padding: 22px 0;
+  padding: 22px 10px;
   max-width: 1280px;
   display: flex;
   justify-content: space-between;
@@ -12,6 +12,7 @@ const Wrapper = styled.div`
   @media screen and (max-width: 767px) {
     flex-direction: column;
     gap: 10px;
+    padding: 22px 0 0 0;
   }
 `;
 

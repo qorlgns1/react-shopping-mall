@@ -8,7 +8,7 @@ export interface NavItemProps {
 }
 
 const NavItem = styled(Link)<NavItemProps>`
-  width: 46px;
+  width: 48px;
   height: 50px;
   display: flex;
   flex-direction: column;
@@ -17,6 +17,10 @@ const NavItem = styled(Link)<NavItemProps>`
   font-weight: 400;
   font-size: 12px;
   line-height: 14px;
+
+  @media screen and (max-width: 767px) {
+    width: 180px;
+  }
 
   &::before {
     content: '';
@@ -27,6 +31,10 @@ const NavItem = styled(Link)<NavItemProps>`
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+
+    @media screen and (max-width: 767px) {
+      display: none;
+    }
   }
 `;
 

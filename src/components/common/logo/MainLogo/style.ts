@@ -10,7 +10,8 @@ const LogoImg = styled.img<LogoImgSize>`
   margin-top: 3px;
 
   @media screen and (max-width: 767px) {
-    margin: 0 auto;
+    margin: 0 auto 5px;
+    z-index: 12;
   }
 `;
 
