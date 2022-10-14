@@ -13,7 +13,7 @@ import {
 import MainLogo from '../../components/common/logo/MainLogo/index';
 import { useForm } from 'react-hook-form';
 import { axiosLogin } from '../../apis/loginApi';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 export default function LoginPage() {
   const history = useHistory();
@@ -55,7 +55,9 @@ export default function LoginPage() {
 
   return (
     <Wrapper>
-      <MainLogo size={{ width: '238px', height: '74px' }} />
+      <Link to='/'>
+        <MainLogo size={{ width: '238px', height: '74px' }} />
+      </Link>
       <LoginButtons>
         <li>
           {loginType === 'SELLER' ? (
