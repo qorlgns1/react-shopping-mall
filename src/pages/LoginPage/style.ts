@@ -26,11 +26,11 @@ const LoginButtons = styled.ul`
     text-align: center;
     height: 60px;
   }
+`;
 
-  & > li:last-child {
-    background: #f2f2f2;
-    border-bottom: 1px solid #c4c4c4;
-  }
+const CheckedLoginButton = styled.button`
+  background: #f2f2f2;
+  border-bottom: 1px solid #c4c4c4;
 `;
 
 const LoginForm = styled.form`
@@ -54,6 +54,14 @@ const LoginInput = styled.input`
   &::placeholder {
     color: #c4c4c4;
   }
+`;
+
+const ErrorMessageBox = styled.p`
+  margin: 26px 0 -10px;
+  color: #eb5757;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
 `;
 
 const LoginSubmitButton = styled.button`
@@ -93,8 +101,10 @@ const JoinLink = styled(Link)`
 export {
   Wrapper,
   LoginButtons,
+  CheckedLoginButton,
   LoginForm,
   LoginInput,
+  ErrorMessageBox,
   LoginSubmitButton,
   LoginSubWrapper,
   JoinLink,
