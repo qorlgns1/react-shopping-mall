@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import reset from 'styled-reset';
 import App from './App';
 import styled, { createGlobalStyle } from 'styled-components';
+import { RecoilRoot } from 'recoil';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -74,10 +75,12 @@ const root = ReactDOM.createRoot(
 root.render(
   <>
     <GlobalStyle />
-    <BrowserRouter>
-      <AppFixedWrap>
-        <App />
-      </AppFixedWrap>
-    </BrowserRouter>
+    <RecoilRoot>
+      <BrowserRouter>
+        <AppFixedWrap>
+          <App />
+        </AppFixedWrap>
+      </BrowserRouter>
+    </RecoilRoot>
   </>,
 );

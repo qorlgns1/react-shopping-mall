@@ -14,10 +14,12 @@ import MainLogo from '../../components/common/logo/MainLogo/index';
 import { useForm } from 'react-hook-form';
 import { axiosLogin } from '../../apis/loginApi';
 import { Link, useHistory } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { isLogin } from '../../atoms';
 
 export default function LoginPage() {
   const history = useHistory();
-
+  const [isMemberLogin, setIsMemberLogin] = useRecoilState(isLogin);
   const {
     register,
     handleSubmit,
@@ -25,6 +27,7 @@ export default function LoginPage() {
     formState: { errors },
   } = useForm();
   const [loginType, setLoginType] = useState('BUYER');
+
   const onSubmit = async (userInfo: any) => {
     const loginInfo = {
       username: userInfo.id,
@@ -36,6 +39,7 @@ export default function LoginPage() {
     console.log(requestResult);
 
     if (requestResult) {
+      setIsMemberLogin(true);
       history.push('/');
     }
   };
@@ -51,6 +55,10 @@ export default function LoginPage() {
     if (errors?.pw?.type === 'required') {
       return <ErrorMessageBox>비밀번호를 입력해주세요.</ErrorMessageBox>;
     }
+  }
+
+  if (isMemberLogin) {
+    history.push('/');
   }
 
   return (
