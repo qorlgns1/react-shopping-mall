@@ -6,10 +6,11 @@ export default function MovePageNavItem({
   title,
   logo,
   to,
+  onClick,
   ...props
 }: NavItemProps) {
   return (
-    <NavItem to={to} title={title} logo={logo} {...props}>
+    <NavItem to={to} title={title} onClick={onClick} logo={logo} {...props}>
       {title}
     </NavItem>
   );

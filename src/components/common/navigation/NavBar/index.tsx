@@ -3,9 +3,12 @@ import './navbar.css';
 import MovePageNavItem from '../MovePageNavItem/index';
 import cartIcon from '../../../../assets/icon/icon-shopping-cart.svg';
 import userIcon from '../../../../assets/icon/icon-user.svg';
+import { useRecoilState } from 'recoil';
+import { isLogin } from '../../../../atoms';
 
 export default function Navbar() {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
+  const [isMemberLogin, setIsMemberLogin] = useRecoilState(isLogin);
 
   return (
     <nav className='navigation'>
@@ -39,7 +42,16 @@ export default function Navbar() {
             <MovePageNavItem to='/shopping' title='장바구니' logo={cartIcon} />
           </li>
           <li>
-            <MovePageNavItem to='/login' title='로그인' logo={userIcon} />
+            {!isMemberLogin ? (
+              <MovePageNavItem to='/login' title='로그인' logo={userIcon} />
+            ) : (
+              <MovePageNavItem
+                to='/'
+                title='로그아웃'
+                logo={userIcon}
+                onClick={() => setIsMemberLogin(false)}
+              />
+            )}
           </li>
         </ul>
       </div>

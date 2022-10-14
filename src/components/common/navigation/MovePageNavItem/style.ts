@@ -5,6 +5,7 @@ export interface NavItemProps {
   title: string;
   logo: string;
   to: string;
+  onClick?: () => void;
 }
 
 const NavItem = styled(Link)<NavItemProps>`
@@ -31,7 +32,7 @@ const NavItem = styled(Link)<NavItemProps>`
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-
+    margin: 0 auto;
     @media screen and (max-width: 767px) {
       display: none;
     }
