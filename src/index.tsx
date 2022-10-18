@@ -5,6 +5,7 @@ import reset from 'styled-reset';
 import App from './App';
 import styled, { createGlobalStyle } from 'styled-components';
 import { RecoilRoot } from 'recoil';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -69,18 +70,22 @@ const AppFixedWrap = styled.div`
   min-width: 375px;
 `;
 
+const queryClient = new QueryClient();
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 root.render(
   <>
     <GlobalStyle />
-    <RecoilRoot>
-      <BrowserRouter>
-        <AppFixedWrap>
-          <App />
-        </AppFixedWrap>
-      </BrowserRouter>
-    </RecoilRoot>
+    <QueryClientProvider client={queryClient}>
+      <RecoilRoot>
+        <BrowserRouter>
+          <AppFixedWrap>
+            <App />
+          </AppFixedWrap>
+        </BrowserRouter>
+      </RecoilRoot>
+    </QueryClientProvider>
   </>,
 );
