@@ -19,7 +19,7 @@ import { isLogin } from '../../atoms';
 
 export default function LoginPage() {
   const history = useHistory();
-  const [isMemberLogin, setIsMemberLogin] = useRecoilState(isLogin);
+  const [isMemberLoginInfo, setIsMemberLoginInfo] = useRecoilState(isLogin);
   const {
     register,
     handleSubmit,
@@ -36,10 +36,9 @@ export default function LoginPage() {
     };
 
     const [response, requestResult] = await axiosLogin(loginInfo);
-    console.log(requestResult);
 
     if (requestResult) {
-      setIsMemberLogin(true);
+      setIsMemberLoginInfo(response);
       history.push('/');
     }
   };
@@ -57,7 +56,7 @@ export default function LoginPage() {
     }
   }
 
-  if (isMemberLogin) {
+  if (isMemberLoginInfo) {
     history.push('/');
   }
 
