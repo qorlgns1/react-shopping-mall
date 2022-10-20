@@ -78,14 +78,14 @@ const root = ReactDOM.createRoot(
 root.render(
   <>
     <GlobalStyle />
-    <QueryClientProvider client={queryClient}>
-      <RecoilRoot>
-        <BrowserRouter>
+    <BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <RecoilRoot>
           <AppFixedWrap>
             <App />
           </AppFixedWrap>
-        </BrowserRouter>
-      </RecoilRoot>
-    </QueryClientProvider>
+        </RecoilRoot>
+      </QueryClientProvider>
+    </BrowserRouter>
   </>,
 );
