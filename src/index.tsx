@@ -18,7 +18,9 @@ const GlobalStyle = createGlobalStyle`
     
   * {
     box-sizing:border-box;
+    font-family: 'Spoqa Han Sans Neo';
   }
+
   body {
     font-size: 10px;
   }
