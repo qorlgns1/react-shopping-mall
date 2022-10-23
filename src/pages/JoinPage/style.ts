@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   max-width: 550px;
   margin: 100px auto;
   display: flex;
@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   position: relative;
 `;
 
-const LoginButtons = styled.ul`
+export const LoginButtons = styled.ul`
   margin-top: 70px;
   display: flex;
   width: 100%;
@@ -30,12 +30,12 @@ const LoginButtons = styled.ul`
   }
 `;
 
-const CheckedLoginButton = styled.button`
+export const CheckedLoginButton = styled.button`
   background: #f2f2f2;
   border-bottom: 1px solid #c4c4c4;
 `;
 
-const LoginForm = styled.form`
+export const LoginForm = styled.form`
   padding: 35px;
   width: 100%;
   display: flex;
@@ -46,7 +46,7 @@ const LoginForm = styled.form`
   border-bottom-right-radius: 10px;
 `;
 
-const LoginInput = styled.input`
+export const LoginInput = styled.input`
   padding: 20px 0;
   border: 0;
   border-bottom: 1px solid #c4c4c4;
@@ -60,7 +60,7 @@ const LoginInput = styled.input`
   }
 `;
 
-const ErrorMessageBox = styled.p`
+export const ErrorMessageBox = styled.p`
   margin: 26px 0 -10px;
   color: #eb5757;
   font-weight: 500;
@@ -68,7 +68,7 @@ const ErrorMessageBox = styled.p`
   line-height: 20px;
 `;
 
-const LoginSubmitButton = styled.button`
+export const LoginSubmitButton = styled.button`
   background-color: #21bf48;
   border-radius: 5px;
   font-weight: 700;
@@ -79,7 +79,7 @@ const LoginSubmitButton = styled.button`
   margin-top: 36px;
 `;
 
-const LoginSubWrapper = styled.div`
+export const LoginSubWrapper = styled.div`
   display: flex;
 
   & > a ~ a {
@@ -92,7 +92,7 @@ const LoginSubWrapper = styled.div`
   }
 `;
 
-const JoinLink = styled(Link)`
+export const JoinLink = styled(Link)`
   color: #333333;
   font-weight: 500;
   font-size: 16px;
@@ -102,14 +102,32 @@ const JoinLink = styled(Link)`
   margin-left: auto;
 `;
 
-export {
-  Wrapper,
-  LoginButtons,
-  CheckedLoginButton,
-  LoginForm,
-  LoginInput,
-  ErrorMessageBox,
-  LoginSubmitButton,
-  LoginSubWrapper,
-  JoinLink,
-};
+export const TermsAndSubmitButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: -170px;
+  left: 35px;
+  width: calc(100% - 70px);
+`;
+
+export const ImportantWord = styled.span`
+  font-weight: bold;
+  text-decoration: underline;
+  margin-left: 4px;
+`;
+
+export const TermsLabel = styled.label`
+  font-family: 'Spoqa Han Sans Neo';
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #767676;
+  display: flex;
+  align-items: baseline;
+
+  & > input {
+    display: block;
+    margin-right: 10px;
+  }
+`;
