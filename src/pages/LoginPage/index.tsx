@@ -27,6 +27,7 @@ export default function LoginPage() {
     formState: { errors },
   } = useForm();
   const [loginType, setLoginType] = useState('BUYER');
+  const [loginResult, setLoginResult] = useState(true);
 
   const onSubmit = async (userInfo: any) => {
     const loginInfo = {
@@ -40,6 +41,8 @@ export default function LoginPage() {
     if (requestResult) {
       setIsMemberLoginInfo(response);
       history.push('/');
+    } else {
+      setLoginResult(false);
     }
   };
 
@@ -108,6 +111,12 @@ export default function LoginPage() {
           {...register('pw', { required: true })}
         />
         {loginErrorCheck()}
+        {!loginResult && (
+          <ErrorMessageBox>
+            아이디 또는 비밀번호를 잘못 입력했습니다. <br />
+            입력하신 내용을 다시 확인해주세요.
+          </ErrorMessageBox>
+        )}
         <LoginSubmitButton>로그인</LoginSubmitButton>
       </LoginForm>
       <LoginSubWrapper>
