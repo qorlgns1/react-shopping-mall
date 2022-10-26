@@ -1,0 +1,233 @@
+import React, { ChangeEvent, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { axiosIdCheck, axiosJoin } from '../../apis/joinApi';
+import { joinPhoneNumberAtom } from '../../atoms';
+import BasicInput from '../common/input/BasicInput';
+import ErrorMessageBox from '../common/input/ErrorMessageBox';
+import PhoneInput from '../common/input/PhoneInput';
+import PwCheckInput from '../common/input/PwCheckInput';
+import ValidCheckInput from '../common/input/ValidCheckInput';
+import {
+  Form,
+  ImportantWord,
+  InputWrapper,
+  LoginSubmitButton,
+  TermsLabel,
+  TypeSelectList,
+  Wrapper,
+} from './style';
+
+export interface JoinFormType {
+  type: 'BUYER' | 'SELLER';
+  id: string;
+  idValidCheck: boolean;
+  pw: string;
+  pwCheck: string;
+  pwSameCheck: boolean;
+  name: string;
+  phoneNumber: string;
+  phoneNumberMiddle?: string;
+  phoneNumberLast?: string;
+}
+
+export default function SignUp() {
+  const history = useHistory();
+  const [joinInfo, setJoinInfo] = useState<JoinFormType>({
+    type: 'BUYER',
+    id: '',
+    idValidCheck: false,
+    pw: '',
+    pwCheck: '',
+    pwSameCheck: false,
+    name: '',
+    phoneNumber: '010',
+    phoneNumberMiddle: '',
+    phoneNumberLast: '',
+  });
+
+  const joinPhoneNumber = useRecoilValue(joinPhoneNumberAtom);
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setError,
+    clearErrors,
+    formState: { errors },
+  } = useForm<JoinFormType>();
+
+  // 구매회원가입 | 판매회원가입 타입 정하는 함수
+  const handleTypeClick = (e: any) => {
+    e.preventDefault();
+
+    const type = e.target.name;
+    setJoinInfo((prev) => ({ ...prev, type }));
+  };
+
+  // 아이디 유효성 검사하는 함수
+  const idCheck = async (e: any) => {
+    const id = watch('id');
+
+    if (!id) {
+      alert('id를 입력해주세요.');
+      return;
+    }
+
+    try {
+      const [resultMessage, result] = await axiosIdCheck(id);
+      if (result) {
+        setJoinInfo((prev) => ({ ...prev, idValidCheck: true }));
+      }
+      alert(resultMessage);
+    } catch (err) {
+      alert('아이디체크하면서 에러가 발생했습니다. 확인해주세요.');
+    }
+  };
+
+  // 아이디 입력시 유효성검사를 다시 하도록 idValidCheck를 false로 만들어주는 함수
+  const handleIdChange = () => {
+    setJoinInfo((prev) => ({ ...prev, idValidCheck: false }));
+  };
+
+  // 비밀번호 유효성 검사하는 함수
+  const handlePwValidCheck = (e: ChangeEvent<HTMLInputElement>) => {
+    const regex = new RegExp(/^(?=.*[A-Za-z])[A-Za-z\d]{8,}$/);
+    const pwValidCheck = regex.test(e.target.value);
+
+    return pwValidCheck;
+  };
+
+  // 비밀번호와 비밀번호확인이 일치하는지 확인하는 함수
+  const handlePwValidCheckSame = (e: ChangeEvent<HTMLInputElement>) => {
+    const pw: string = (document.getElementById('pw') as HTMLInputElement)
+      .value;
+    const pwCheck: string = (
+      document.getElementById('pwCheck') as HTMLInputElement
+    ).value;
+
+    if (pw === pwCheck) {
+      setJoinInfo((prev) => ({ ...prev, pwSameCheck: true }));
+      return true;
+    } else {
+      setJoinInfo((prev) => ({ ...prev, pwSameCheck: false }));
+      return false;
+    }
+  };
+
+  // 회원가입하는 함수
+  const handleJoin = async (formData: any) => {
+    const { id, pw, pwCheck, name } = formData;
+    const termsState = (document.getElementById('terms') as HTMLInputElement)
+      .checked;
+    if (!termsState) {
+      alert('약관에 동의를 먼저 해주세요.');
+      return;
+    }
+
+    if (joinPhoneNumber.join('').length < 10) {
+      alert('휴대폰번호를 확인해주세요.');
+      setError('phoneNumber', {
+        type: 'custom',
+        message: '휴대폰번호를 확인해주세요',
+      });
+      return;
+    } else {
+      clearErrors('phoneNumber');
+    }
+
+    const userInfo = {
+      username: id,
+      password: pw,
+      password2: pwCheck,
+      phone_number: joinPhoneNumber.join(''),
+      name,
+    };
+
+    try {
+      const [resultMessage, result] = await axiosJoin(userInfo);
+
+      if (result) {
+        history.push('/login');
+      } else {
+        alert(JSON.stringify(resultMessage));
+      }
+    } catch (err) {
+      console.log('회원가입 에러', err);
+    }
+  };
+
+  return (
+    <Wrapper>
+      <h2 className='ir'>회원가입</h2>
+      <Form onSubmit={handleSubmit(handleJoin)}>
+        <TypeSelectList type={joinInfo.type} onClick={handleTypeClick}>
+          <li>
+            <button name='BUYER'>구매회원가입</button>
+          </li>
+          <li>
+            <button name='SELLER'>판매회원가입</button>
+          </li>
+        </TypeSelectList>
+        <InputWrapper>
+          <ValidCheckInput
+            label='아이디'
+            id='id'
+            onClick={idCheck}
+            onChange={handleIdChange}
+            register={register}
+          />
+          {errors['id'] && (
+            <ErrorMessageBox>{errors['id'].message}</ErrorMessageBox>
+          )}
+          <PwCheckInput
+            label='비밀번호'
+            type='password'
+            id='pw'
+            register={register}
+            onChange={handlePwValidCheck}
+            pattern={/^(?=.*[A-Za-z])[A-Za-z\d]{8,}$/}
+          />
+          {errors['pw'] && (
+            <ErrorMessageBox>{errors['pw'].message}</ErrorMessageBox>
+          )}
+          <PwCheckInput
+            label='비밀번호 확인'
+            type='password'
+            id='pwCheck'
+            register={register}
+            onChange={handlePwValidCheckSame}
+            pattern={/^(?=.*[A-Za-z])[A-Za-z\d]{8,}$/}
+          />
+          {errors['pwCheck'] && (
+            <ErrorMessageBox>{errors['pwCheck'].message}</ErrorMessageBox>
+          )}
+          <BasicInput label='이름' id='name' register={register} />
+          {errors['name'] && (
+            <ErrorMessageBox>{errors['name'].message}</ErrorMessageBox>
+          )}
+          <PhoneInput label='휴대폰번호' id='phoneNumber' register={register} />
+          {errors['phoneNumberMiddle'] ? (
+            <ErrorMessageBox>
+              {errors['phoneNumberMiddle'].message}
+            </ErrorMessageBox>
+          ) : errors['phoneNumberLast'] ? (
+            <ErrorMessageBox>
+              {errors['phoneNumberLast'].message}
+            </ErrorMessageBox>
+          ) : null}
+        </InputWrapper>
+        <TermsLabel htmlFor='terms'>
+          <input type='checkbox' id='terms' />
+          <span>
+            호두샵의<ImportantWord>이용약관</ImportantWord> 및
+            <ImportantWord>개인정보처리방침</ImportantWord>에 대한 내용을
+            확인하였고 동의합니다.
+          </span>
+        </TermsLabel>
+        <LoginSubmitButton>가입하기</LoginSubmitButton>
+      </Form>
+    </Wrapper>
+  );
+}

@@ -8,3 +8,8 @@ export const isLogin = atom({
   default: false,
   effects_UNSTABLE: [persistAtom],
 });
+
+export const joinPhoneNumberAtom = atom({
+  key: 'joinPhoneNumber',
+  default: ['010', '', ''],
+});

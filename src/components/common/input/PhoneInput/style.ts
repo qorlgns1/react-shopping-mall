@@ -74,6 +74,7 @@ export const SelectBoxList = styled.ul<SelectBoxStateType>`
   border: 1px solid #c4c4c4;
   box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
+  z-index: 1;
 
   & > li > button {
     display: block;
