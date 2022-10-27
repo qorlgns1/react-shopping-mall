@@ -2,7 +2,11 @@ import React, { ChangeEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { axiosIdCheck, axiosJoin } from '../../apis/joinApi';
+import {
+  axiosCompanyRegistrationNumberCheck,
+  axiosIdCheck,
+  axiosJoin,
+} from '../../apis/joinApi';
 import { joinPhoneNumberAtom } from '../../atoms';
 import BasicInput from '../common/input/BasicInput';
 import ErrorMessageBox from '../common/input/ErrorMessageBox';
@@ -30,6 +34,9 @@ export interface JoinFormType {
   phoneNumber: string;
   phoneNumberMiddle?: string;
   phoneNumberLast?: string;
+  companyRegistrationNumber?: string;
+  companyRegistrationNumberValidCheck?: boolean;
+  storeName?: string;
 }
 
 export default function SignUp() {
@@ -45,6 +52,9 @@ export default function SignUp() {
     phoneNumber: '010',
     phoneNumberMiddle: '',
     phoneNumberLast: '',
+    companyRegistrationNumber: '',
+    companyRegistrationNumberValidCheck: false,
+    storeName: '',
   });
 
   const joinPhoneNumber = useRecoilValue(joinPhoneNumberAtom);
@@ -86,9 +96,55 @@ export default function SignUp() {
     }
   };
 
+  // 사업자번호 유효성 검사하는 함수
+  const handleCompanyRegistrationNumberCheck = async (e: any) => {
+    const companyRegistrationNumber = watch('companyRegistrationNumber');
+
+    if (!companyRegistrationNumber) {
+      alert('사업자번호를 입력해주세요.');
+      return;
+    }
+
+    if (
+      parseInt(companyRegistrationNumber).toString() !==
+      companyRegistrationNumber.toString()
+    ) {
+      setError('companyRegistrationNumber', {
+        type: 'custom',
+        message: '사업자번호는 숫자만 입력가능합니다.',
+      });
+      return;
+    } else {
+      clearErrors('companyRegistrationNumber');
+    }
+
+    try {
+      const [resultMessage, result] = await axiosCompanyRegistrationNumberCheck(
+        companyRegistrationNumber,
+      );
+      if (result) {
+        setJoinInfo((prev) => ({
+          ...prev,
+          companyRegistrationNumberValidCheck: true,
+        }));
+      }
+      alert(resultMessage);
+    } catch (err) {
+      alert('사업자번호 체크하면서 에러가 발생했습니다. 확인해주세요.');
+    }
+  };
+
   // 아이디 입력시 유효성검사를 다시 하도록 idValidCheck를 false로 만들어주는 함수
   const handleIdChange = () => {
     setJoinInfo((prev) => ({ ...prev, idValidCheck: false }));
+  };
+
+  // 사업자번호 입력시 유효성검사를 다시 하도록 idValidCheck를 false로 만들어주는 함수
+  const handleCompanyRegistrationNumberChange = () => {
+    setJoinInfo((prev) => ({
+      ...prev,
+      companyRegistrationNumberValidCheck: false,
+    }));
   };
 
   // 비밀번호 유효성 검사하는 함수
@@ -118,6 +174,7 @@ export default function SignUp() {
 
   // 회원가입하는 함수
   const handleJoin = async (formData: any) => {
+    debugger;
     const { id, pw, pwCheck, name } = formData;
     const termsState = (document.getElementById('terms') as HTMLInputElement)
       .checked;
@@ -137,7 +194,17 @@ export default function SignUp() {
       clearErrors('phoneNumber');
     }
 
-    const userInfo = {
+    interface IuserInfo {
+      username: string;
+      password: string;
+      password2: string;
+      phone_number: string;
+      name: string;
+      company_registration_number?: string;
+      store_name?: string;
+    }
+
+    let userInfo: IuserInfo = {
       username: id,
       password: pw,
       password2: pwCheck,
@@ -145,8 +212,21 @@ export default function SignUp() {
       name,
     };
 
+    if (joinInfo.type === 'SELLER') {
+      const { companyRegistrationNumber, storeName } = formData;
+
+      userInfo = {
+        ...userInfo,
+        company_registration_number: companyRegistrationNumber,
+        store_name: storeName,
+      };
+    }
+
     try {
-      const [resultMessage, result] = await axiosJoin(userInfo);
+      const [resultMessage, result] =
+        joinInfo.type === 'BUYER'
+          ? await axiosJoin(userInfo)
+          : await axiosJoin(userInfo, 'SELLER');
 
       if (result) {
         history.push('/login');
@@ -217,6 +297,29 @@ export default function SignUp() {
               {errors['phoneNumberLast'].message}
             </ErrorMessageBox>
           ) : null}
+          {joinInfo.type === 'SELLER' && (
+            <>
+              <ValidCheckInput
+                label='사업자 등록번호'
+                id='companyRegistrationNumber'
+                onClick={handleCompanyRegistrationNumberCheck}
+                onChange={handleCompanyRegistrationNumberChange}
+                register={register}
+              />
+              <ErrorMessageBox>
+                {errors['companyRegistrationNumber'] &&
+                  errors['companyRegistrationNumber'].message}
+              </ErrorMessageBox>
+              <BasicInput
+                label='스토어이름'
+                id='storeName'
+                register={register}
+              />
+              {errors['storeName'] && (
+                <ErrorMessageBox>{errors['storeName'].message}</ErrorMessageBox>
+              )}
+            </>
+          )}
         </InputWrapper>
         <TermsLabel htmlFor='terms'>
           <input type='checkbox' id='terms' />

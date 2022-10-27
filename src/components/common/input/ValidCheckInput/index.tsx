@@ -33,13 +33,6 @@ export default function ValidCheckInput({
               value: true,
               message: `${label}(을)를 입력해주세요.`,
             },
-            validate: (nickname) => {
-              console.log(nickname);
-              return (
-                nickname.trim().length >= 3 ||
-                '닉네임은 3글자 이상 입력해주세요.'
-              );
-            },
           })}
         />
         <Button type='button' onClick={onClick}>
