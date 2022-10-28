@@ -22,6 +22,7 @@ const Wrapper = styled.li`
   font-family: 'Spoqa Han Sans Neo';
   font-style: normal;
   font-weight: 400;
+  cursor: pointer;
 
   @media screen and (max-width: 767px) {
     width: 180px;
