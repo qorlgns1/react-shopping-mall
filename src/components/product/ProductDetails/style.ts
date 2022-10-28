@@ -58,7 +58,7 @@ export const ProductPrice = styled.span`
     line-height: 23px;
   }
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 1000px) {
     margin-bottom: 60px;
   }
 `;
