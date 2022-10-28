@@ -31,9 +31,13 @@ export default function Amount({ useRef, setAmount }: any) {
 
   return (
     <Wrapper>
-      <Button icon={minusIcon} onClick={handleLeftClick} />
+      <Button icon={minusIcon} onClick={handleLeftClick}>
+        <span className='ir'>수량 빼기 버튼</span>
+      </Button>
       <Display ref={useRef} onChange={handleChange} />
-      <Button icon={plusIcon} onClick={handleRightClick} />
+      <Button icon={plusIcon} onClick={handleRightClick}>
+        <span className='ir'>수량 더하기 버튼</span>
+      </Button>
     </Wrapper>
   );
 }
