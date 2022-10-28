@@ -43,7 +43,7 @@
   width: 38px;
   padding: 0.5rem;
   border-radius: 50%;
-  background-color: green;
+  background-color: #21bf48;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
   position: absolute;
@@ -54,7 +54,7 @@
 }
 
 .hamburger:hover {
-  background-color: #2642af;
+  background-color: green;
 }
 
 @media screen and (max-width: 767px) {
