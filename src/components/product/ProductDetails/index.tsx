@@ -1,5 +1,4 @@
-import { useRef, useState } from 'react';
-import styled from 'styled-components';
+import { useRef, useState, useEffect } from 'react';
 import Amount from '../../common/Amount';
 import {
   AddShoppingCartButton,
@@ -22,7 +21,6 @@ import {
 } from './style';
 
 export default function ProductDetails({ productInfo }: any) {
-  // console.log(productInfo);
   const {
     image,
     product_info: productIntro,
@@ -31,9 +29,17 @@ export default function ProductDetails({ productInfo }: any) {
     price,
     shipping_method,
     shipping_fee,
+    stock,
   } = productInfo;
-  const [amount, setAmount] = useState(1);
-  const amountRef = useRef(1);
+  const [amount, setAmount] = useState<number>(1);
+  const amountRef = useRef<any>(1);
+
+  useEffect(() => {
+    if (amount > stock) {
+      setAmount(stock);
+      amountRef.current.value = stock;
+    }
+  }, [amount]);
 
   return (
     <Wrapper>
@@ -42,12 +48,15 @@ export default function ProductDetails({ productInfo }: any) {
         <ProductInfoWrapper>
           <StoreName>{store_name}</StoreName>
           <ProductName>{product_name}</ProductName>
-          <ProductPrice>{price}</ProductPrice>
+          <ProductPrice>{price.toLocaleString('ko-KR')}</ProductPrice>
           <DeliveryInfoWrapper>
             {shipping_method === 'DELIVERY'
               ? '택배배송 '
               : `직접배송(화물배달) `}
-            /{shipping_fee === 0 ? ' 무료배송' : ` 배송비: ${shipping_fee}원`}
+            /
+            {shipping_fee === 0
+              ? ' 무료배송'
+              : ` 배송비: ${shipping_fee.toLocaleString('ko-KR')}원`}
           </DeliveryInfoWrapper>
         </ProductInfoWrapper>
         <AmountWrapper>
