@@ -13,3 +13,9 @@ export const joinPhoneNumberAtom = atom({
   key: 'joinPhoneNumber',
   default: ['010', '', ''],
 });
+
+export const shoppingCartAtom = atom({
+  key: 'shoppingCart',
+  default: {},
+  effects_UNSTABLE: [persistAtom],
+});

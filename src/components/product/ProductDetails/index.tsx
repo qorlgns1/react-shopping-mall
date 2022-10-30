@@ -1,4 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
+import { shoppingCartAtom } from '../../../atoms';
+import { useRecoilState } from 'recoil';
 import Amount from '../../common/Amount';
 import {
   AddShoppingCartButton,
@@ -22,6 +24,7 @@ import {
 
 export default function ProductDetails({ productInfo }: any) {
   const {
+    product_id,
     image,
     product_info: productIntro,
     store_name,
@@ -33,6 +36,29 @@ export default function ProductDetails({ productInfo }: any) {
   } = productInfo;
   const [amount, setAmount] = useState<number>(1);
   const amountRef = useRef<any>(1);
+  const [shoppingCart, setShoppingCart] = useRecoilState(shoppingCartAtom);
+
+  // 상품을 장바구니에 추가하는 함수
+  const handleAddCart = () => {
+    setShoppingCart((prev: any) => {
+      // 기존에 장바구니에 추가된 상품에서 (소비자가 구매를 원하는 수량 + 기존 장바구니 수량) > 재고 인 경우
+      // 재고 양 만큼 장바구니에 추가한다.
+      let isStockCheck = true;
+
+      const wantBuyCount =
+        parseInt(prev[product_id]) + parseInt(amount.toString());
+      if (wantBuyCount > stock) {
+        isStockCheck = false;
+      }
+
+      return prev[product_id]
+        ? {
+            ...prev,
+            [product_id]: isStockCheck ? wantBuyCount : stock,
+          }
+        : { ...prev, [product_id]: amount };
+    });
+  };
 
   useEffect(() => {
     if (amount > stock) {
@@ -73,7 +99,9 @@ export default function ProductDetails({ productInfo }: any) {
         </PriceInfoWrapper>
         <BuyButtonWrapper>
           <BuyNowButton>바로구매</BuyNowButton>
-          <AddShoppingCartButton>장바구니</AddShoppingCartButton>
+          <AddShoppingCartButton onClick={handleAddCart}>
+            장바구니
+          </AddShoppingCartButton>
         </BuyButtonWrapper>
       </OrderInfoWrapper>
     </Wrapper>
