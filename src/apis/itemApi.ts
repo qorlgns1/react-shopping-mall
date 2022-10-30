@@ -15,3 +15,13 @@ export const axiosGetProducts = async (pageParam = 1) => {
     console.error('axiosGetProducts error', error);
   }
 };
+
+export const axiosGetProduct = async (productId: number) => {
+  try {
+    const { data } = await axiosInstance.get(`/products/${productId}`);
+
+    return data;
+  } catch (error) {
+    console.error('axiosGetProducts error', error);
+  }
+};
