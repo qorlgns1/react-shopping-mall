@@ -1,17 +1,17 @@
-import { axiosGetProducts } from '../apis/itemApi';
-import Carousel from '../components/Carousel';
-import Footer from '../components/common/Footer';
-import BasicHeader from '../components/header/BasicHeader';
-import ItemList from '../components/ItemList';
+import { axiosGetProducts } from '../../apis/itemApi';
+import Carousel from '../../components/Carousel';
+import Footer from '../../components/common/Footer';
+import BasicHeader from '../../components/header/BasicHeader';
+import ItemList from '../../components/ItemList';
 import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 import { AxiosError } from 'axios';
 import React, { useEffect } from 'react';
-import SkeletonItem from '../components/ItemList/SkeletonItem';
-import Item from '../components/ItemList/Item';
-import { ItemType } from '../components/ItemList/Item/style';
+import SkeletonItem from '../../components/ItemList/SkeletonItem';
+import Item from '../../components/ItemList/Item';
+import { ItemType } from '../../components/ItemList/Item/style';
 
-export default function Main() {
+export default function MainPage() {
   const { ref, inView } = useInView();
   const { status, data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<
     any,
