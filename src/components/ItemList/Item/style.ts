@@ -19,8 +19,6 @@ const Wrapper = styled.li`
   display: flex;
   flex-direction: column;
   width: 380px;
-  font-family: 'Spoqa Han Sans Neo';
-  font-style: normal;
   font-weight: 400;
   cursor: pointer;
 
@@ -41,7 +39,7 @@ const ItemImage = styled.img`
 `;
 
 const ItemStoreName = styled.span`
-  padding-bottom: 10px;
+  margin-bottom: 10px;
   font-size: 16px;
   color: #767676;
   overflow: hidden;
@@ -50,7 +48,7 @@ const ItemStoreName = styled.span`
 `;
 
 const ItemProductName = styled.span`
-  padding-bottom: 10px;
+  margin-bottom: 10px;
   font-size: 18px;
   overflow: hidden;
   white-space: nowrap;
