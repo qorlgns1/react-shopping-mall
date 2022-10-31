@@ -8,7 +8,7 @@ export default function MovePageNavList() {
   return (
     <NavList>
       <li>
-        <MovePageNavItem to='/shopping' title='장바구니' logo={cartIcon} />
+        <MovePageNavItem to='/shoppingCart' title='장바구니' logo={cartIcon} />
       </li>
       <li>
         <MovePageNavItem to='/login' title='로그인' logo={userIcon} />

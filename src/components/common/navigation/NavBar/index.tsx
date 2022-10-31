@@ -39,7 +39,11 @@ export default function Navbar() {
       >
         <ul>
           <li>
-            <MovePageNavItem to='/shopping' title='장바구니' logo={cartIcon} />
+            <MovePageNavItem
+              to='/shoppingCart'
+              title='장바구니'
+              logo={cartIcon}
+            />
           </li>
           <li>
             {!isMemberLogin ? (
