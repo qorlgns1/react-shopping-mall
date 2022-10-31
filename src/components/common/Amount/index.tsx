@@ -3,7 +3,7 @@ import plusIcon from '../../../assets/icon/icon-plus-line.svg';
 import minusIcon from '../../../assets/icon/icon-minus-line.svg';
 import { Button, Display, Wrapper } from './style';
 
-export default function Amount({ useRef, setAmount }: any) {
+export default function Amount({ useRef, setAmount, count = 1 }: any) {
   const handleLeftClick = () => {
     const { current } = useRef;
     current.value < 1 ? (current.value = 0) : (current.value -= 1);
@@ -26,7 +26,7 @@ export default function Amount({ useRef, setAmount }: any) {
   };
 
   useEffect(() => {
-    useRef.current.value = 1;
+    useRef.current.value = count;
   }, []);
 
   return (
