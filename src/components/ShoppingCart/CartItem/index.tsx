@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import Amount from '../../common/Amount';
+import { CheckBox } from '../common/style';
 import {
   AmountBox,
-  CheckBox,
   DeliveryInfoWrapper,
   ProductDeleteFromShoppingCartButton,
   ProductImage,

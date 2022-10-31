@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import { CheckBox } from '../common/style';
 import {
   AmountBox,
   CartListHeader,
-  CheckBox,
   ProductInfoBox,
   ProductPriceBox,
 } from './style';

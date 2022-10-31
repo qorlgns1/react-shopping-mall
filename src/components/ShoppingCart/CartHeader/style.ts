@@ -14,42 +14,6 @@ export const CartListHeader = styled.header`
   text-align: center;
 `;
 
-export const CheckBox = styled.div`
-  width: 108px;
-  text-align: start;
-
-  & > input {
-    display: none;
-  }
-
-  & > input + label {
-    cursor: pointer;
-    position: relative;
-    padding-left: 30px;
-  }
-
-  & > input + label:before {
-    content: '';
-    display: inline-block;
-    position: relative;
-    width: 20px;
-    height: 20px;
-    border: 4px solid #21bf48;
-    border-radius: 50%;
-  }
-
-  & > input:checked + label:after {
-    content: '';
-    width: 12px;
-    height: 12px;
-    position: absolute;
-    top: -4px;
-    right: 8px;
-    border-radius: 50%;
-    background-color: #21bf48;
-  }
-`;
-
 export const ProductInfoBox = styled.div`
   width: 662px;
 `;

@@ -20,28 +20,6 @@ export const Wrapper = styled.li`
   align-items: center;
 `;
 
-export const CheckBox = styled.div`
-  padding-left: 30px;
-  width: 108px;
-
-  & > input {
-    display: none;
-  }
-
-  & > input + label {
-    cursor: pointer;
-  }
-
-  & > input + label:before {
-    content: '';
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border: 4px solid #f2f2f2;
-    border-radius: 50%;
-  }
-`;
-
 export const ProductInfoBox = styled.div`
   padding: 20px 0;
   width: 662px;

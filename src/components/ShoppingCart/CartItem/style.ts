@@ -14,42 +14,6 @@ export const Wrapper = styled.li`
   border-radius: 10px;
 `;
 
-export const CheckBox = styled.div`
-  padding-left: 30px;
-  width: 108px;
-  position: relative;
-
-  & > input {
-    display: none;
-  }
-
-  & > input + label {
-    cursor: pointer;
-    position: relative;
-  }
-
-  & > input + label:before {
-    content: '';
-    display: inline-block;
-    position: relative;
-    width: 20px;
-    height: 20px;
-    border: 4px solid #21bf48;
-    border-radius: 50%;
-  }
-
-  & > input:checked + label:after {
-    content: '';
-    width: 12px;
-    height: 12px;
-    position: absolute;
-    top: -4px;
-    left: 8px;
-    border-radius: 50%;
-    background-color: #21bf48;
-  }
-`;
-
 export const ProductInfoBox = styled.div`
   padding: 20px 0;
   width: 662px;

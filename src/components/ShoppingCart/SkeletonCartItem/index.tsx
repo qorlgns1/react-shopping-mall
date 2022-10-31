@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react';
 import Amount from '../../common/Amount';
+import { CheckBox } from '../common/style';
 import {
   AmountBox,
-  CheckBox,
   DeliveryInfoWrapper,
   ProductDeleteFromShoppingCartButton,
   ProductImage,
@@ -23,7 +23,7 @@ export default function SkeletonCartItem() {
 
   return (
     <Wrapper>
-      <CheckBox>
+      <CheckBox skeleton={true}>
         <input type='checkbox' id='check' />
         <label htmlFor='check'></label>
       </CheckBox>
