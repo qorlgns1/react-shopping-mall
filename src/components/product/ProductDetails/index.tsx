@@ -21,6 +21,7 @@ import {
   TotalPriceText,
   Wrapper,
 } from './style';
+import { successToast } from '../../../utils/toast';
 
 export default function ProductDetails({ productInfo }: any) {
   const {
@@ -40,6 +41,8 @@ export default function ProductDetails({ productInfo }: any) {
 
   // 상품을 장바구니에 추가하는 함수
   const handleAddCart = () => {
+    successToast('장바구니에 추가되었습니다.');
+
     setShoppingCart((prev: any) => {
       // 기존에 장바구니에 추가된 상품에서 (소비자가 구매를 원하는 수량 + 기존 장바구니 수량) > 재고 인 경우
       // 재고 양 만큼 장바구니에 추가한다.
