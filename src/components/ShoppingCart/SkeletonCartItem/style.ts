@@ -1,5 +1,12 @@
 import styled, { css, keyframes } from 'styled-components';
-import deleteIcon from '../../../assets/icon/icon-delete.svg';
+import {
+  DeliveryInfoWrapper,
+  ProductName,
+  ProductOrderButton,
+  ProductPrice,
+  ProductTotalPrice,
+  StoreName,
+} from '../CartItem/style';
 
 const loading = keyframes`
   0% {
@@ -14,6 +21,8 @@ const loading = keyframes`
 const Animation = css`
   position: relative;
   overflow: hidden;
+  border-radius: 5px;
+  background-color: #f2f2f2;
 
   &::before {
     content: '';
@@ -27,102 +36,43 @@ const Animation = css`
   }
 `;
 
-export const Wrapper = styled.li`
-  position: relative;
-  display: flex;
-  height: 200px;
-  border: 2px solid #e0e0e0;
-  border-radius: 10px;
-  align-items: center;
-`;
-
-export const ProductInfoBox = styled.div`
-  padding: 20px 0;
-  width: 662px;
-  display: flex;
-  gap: 36px;
-`;
-
-export const ProductImage = styled.div`
+export const SkeletonProductImage = styled.div`
   width: 160px;
   height: 160px;
-  border-radius: 10px;
-  background-color: #f2f2f2;
   ${Animation}
+  border-radius: 10px;
 `;
 
-export const StoreName = styled.div`
-  margin-bottom: 10px;
+export const SkeletonStoreName = styled(StoreName)`
   width: 180px;
   height: 18px;
-  background-color: #f2f2f2;
-  border-radius: 5px;
   ${Animation}
 `;
 
-export const ProductName = styled.div`
-  margin-bottom: 10px;
+export const SkeletonProductName = styled(ProductName)`
   width: 200px;
   height: 22px;
-  background-color: #f2f2f2;
-  border-radius: 5px;
   ${Animation}
 `;
 
-export const ProductPrice = styled.div`
-  margin-bottom: 40px;
+export const SkeletonProductPrice = styled(ProductPrice)`
   width: 110px;
   height: 20px;
-  background-color: #f2f2f2;
-  border-radius: 5px;
   ${Animation}
 `;
 
-export const DeliveryInfoWrapper = styled.div`
+export const SkeletonDeliveryInfoWrapper = styled(DeliveryInfoWrapper)`
   width: 200px;
   height: 18px;
-  background-color: #f2f2f2;
-  border-radius: 5px;
   ${Animation}
 `;
 
-export const AmountBox = styled.div``;
-
-export const ProductPriceBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-grow: 1;
-  text-align: center;
-  height: 100%;
-`;
-
-export const ProductTotalPrice = styled.strong`
-  margin: 56px 0 26px 0;
+export const SkeletonProductTotalPrice = styled(ProductTotalPrice)`
   width: 110px;
   height: 23px;
-  background-color: #f2f2f2;
-  border-radius: 5px;
   ${Animation}
 `;
 
-export const ProductOrderButton = styled.div`
-  width: 130px;
-  padding: 10px 0;
-  background: #f2f2f2;
-  border-radius: 5px;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 20px;
-  color: #ffffff;
+export const SkeletonProductOrderButton = styled(ProductOrderButton)`
   ${Animation}
-`;
-
-export const ProductDeleteFromShoppingCartButton = styled.button`
-  width: 22px;
-  height: 22px;
-  background-image: url(${deleteIcon});
-  position: absolute;
-  right: 18px;
-  top: 18px;
 `;

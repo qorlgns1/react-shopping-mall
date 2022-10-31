@@ -2,19 +2,21 @@ import { useRef, useState } from 'react';
 import Amount from '../../common/Amount';
 import { CheckBox } from '../common/style';
 import {
-  AmountBox,
-  DeliveryInfoWrapper,
-  ProductDeleteFromShoppingCartButton,
-  ProductImage,
+  Wrapper,
   ProductInfoBox,
   ProductInfoWrapper,
-  ProductName,
-  ProductOrderButton,
-  ProductPrice,
+  AmountBox,
   ProductPriceBox,
-  ProductTotalPrice,
-  StoreName,
-  Wrapper,
+  ProductDeleteFromShoppingCartButton,
+} from '../CartItem/style';
+import {
+  SkeletonProductImage,
+  SkeletonProductOrderButton,
+  SkeletonStoreName,
+  SkeletonProductName,
+  SkeletonProductPrice,
+  SkeletonDeliveryInfoWrapper,
+  SkeletonProductTotalPrice,
 } from './style';
 
 export default function SkeletonCartItem() {
@@ -28,20 +30,20 @@ export default function SkeletonCartItem() {
         <label htmlFor='check'></label>
       </CheckBox>
       <ProductInfoBox>
-        <ProductImage />
+        <SkeletonProductImage />
         <ProductInfoWrapper>
-          <StoreName />
-          <ProductName />
-          <ProductPrice />
-          <DeliveryInfoWrapper />
+          <SkeletonStoreName />
+          <SkeletonProductName />
+          <SkeletonProductPrice />
+          <SkeletonDeliveryInfoWrapper />
         </ProductInfoWrapper>
       </ProductInfoBox>
       <AmountBox>
         <Amount useRef={amountRef} setAmount={setAmount} count={amount} />
       </AmountBox>
       <ProductPriceBox>
-        <ProductTotalPrice />
-        <ProductOrderButton>주문하기</ProductOrderButton>
+        <SkeletonProductTotalPrice />
+        <SkeletonProductOrderButton>주문하기</SkeletonProductOrderButton>
       </ProductPriceBox>
       <ProductDeleteFromShoppingCartButton />
     </Wrapper>
