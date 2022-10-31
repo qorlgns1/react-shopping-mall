@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import deleteIcon from '../../../assets/icon/icon-delete.svg';
 
 const loading = keyframes`
@@ -8,6 +8,22 @@ const loading = keyframes`
   50%,
   100% {
     transform: translateX(210px);
+  }
+`;
+
+const Animation = css`
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 100%;
+    background: linear-gradient(to right, #f2f2f2, #ddd, #f2f2f2);
+    animation: ${loading} 2s infinite linear;
   }
 `;
 
@@ -32,24 +48,7 @@ export const ProductImage = styled.div`
   height: 160px;
   border-radius: 10px;
   background-color: #f2f2f2;
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 50px;
-    height: 100%;
-    background: linear-gradient(to right, #f2f2f2, #ddd, #f2f2f2);
-    animation: ${loading} 2s infinite linear;
-  }
-`;
-
-export const ProductInfoWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${Animation}
 `;
 
 export const StoreName = styled.div`
@@ -58,19 +57,7 @@ export const StoreName = styled.div`
   height: 18px;
   background-color: #f2f2f2;
   border-radius: 5px;
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 50px;
-    height: 100%;
-    background: linear-gradient(to right, #f2f2f2, #ddd, #f2f2f2);
-    animation: ${loading} 2s infinite linear;
-  }
+  ${Animation}
 `;
 
 export const ProductName = styled.div`
@@ -79,19 +66,7 @@ export const ProductName = styled.div`
   height: 22px;
   background-color: #f2f2f2;
   border-radius: 5px;
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 50px;
-    height: 100%;
-    background: linear-gradient(to right, #f2f2f2, #ddd, #f2f2f2);
-    animation: ${loading} 2s infinite linear;
-  }
+  ${Animation}
 `;
 
 export const ProductPrice = styled.div`
@@ -100,19 +75,7 @@ export const ProductPrice = styled.div`
   height: 20px;
   background-color: #f2f2f2;
   border-radius: 5px;
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 50px;
-    height: 100%;
-    background: linear-gradient(to right, #f2f2f2, #ddd, #f2f2f2);
-    animation: ${loading} 2s infinite linear;
-  }
+  ${Animation}
 `;
 
 export const DeliveryInfoWrapper = styled.div`
@@ -120,19 +83,7 @@ export const DeliveryInfoWrapper = styled.div`
   height: 18px;
   background-color: #f2f2f2;
   border-radius: 5px;
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 50px;
-    height: 100%;
-    background: linear-gradient(to right, #f2f2f2, #ddd, #f2f2f2);
-    animation: ${loading} 2s infinite linear;
-  }
+  ${Animation}
 `;
 
 export const AmountBox = styled.div``;
@@ -152,19 +103,7 @@ export const ProductTotalPrice = styled.strong`
   height: 23px;
   background-color: #f2f2f2;
   border-radius: 5px;
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 50px;
-    height: 100%;
-    background: linear-gradient(to right, #f2f2f2, #ddd, #f2f2f2);
-    animation: ${loading} 2s infinite linear;
-  }
+  ${Animation}
 `;
 
 export const ProductOrderButton = styled.div`
@@ -176,19 +115,7 @@ export const ProductOrderButton = styled.div`
   font-size: 16px;
   line-height: 20px;
   color: #ffffff;
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 50px;
-    height: 100%;
-    background: linear-gradient(to right, #f2f2f2, #ddd, #f2f2f2);
-    animation: ${loading} 2s infinite linear;
-  }
+  ${Animation}
 `;
 
 export const ProductDeleteFromShoppingCartButton = styled.button`
