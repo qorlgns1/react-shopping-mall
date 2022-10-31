@@ -16,6 +16,7 @@ import { axiosLogin } from '../../apis/loginApi';
 import { Link, useHistory } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { isLogin } from '../../atoms';
+import { successToast } from '../../utils/toast/index';
 
 export default function LoginPage() {
   const history = useHistory();
@@ -39,6 +40,7 @@ export default function LoginPage() {
     const [response, requestResult] = await axiosLogin(loginInfo);
 
     if (requestResult) {
+      successToast('환영합니다 :)');
       setIsMemberLoginInfo(response);
       history.push('/');
     } else {

@@ -5,10 +5,16 @@ import cartIcon from '../../../../assets/icon/icon-shopping-cart.svg';
 import userIcon from '../../../../assets/icon/icon-user.svg';
 import { useRecoilState } from 'recoil';
 import { isLogin } from '../../../../atoms';
+import { successToast } from '../../../../utils/toast/index';
 
 export default function Navbar() {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
   const [isMemberLogin, setIsMemberLogin] = useRecoilState(isLogin);
+
+  const handleLogout = () => {
+    setIsMemberLogin(false);
+    successToast('로그아웃 되었습니다.');
+  };
 
   return (
     <nav className='navigation'>
@@ -53,7 +59,7 @@ export default function Navbar() {
                 to='/'
                 title='로그아웃'
                 logo={userIcon}
-                onClick={() => setIsMemberLogin(false)}
+                onClick={handleLogout}
               />
             )}
           </li>
