@@ -32,10 +32,14 @@ export const CheckBox = styled.div<{ skeleton?: boolean }>`
           `
         : css`
             background-image: url(${checkBoxIcon});
-
-            & > input:checked + label:before {
-              background-image: url(${checkFillBoxIcon});
-            }
           `}
   }
+
+  ${({ skeleton }) =>
+    !skeleton &&
+    css`
+      & > input:checked + label:before {
+        background-image: url(${checkFillBoxIcon});
+      }
+    `}
 `;
