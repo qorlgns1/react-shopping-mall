@@ -14,7 +14,9 @@ import {
   ProductPriceBox,
   ProductTotalPrice,
   StoreName,
+  StyledSoldout,
   Wrapper,
+  SoldoutButton,
 } from './style';
 
 export default function CartItem({ item }: any) {
@@ -71,12 +73,21 @@ export default function CartItem({ item }: any) {
         <Amount useRef={amountRef} setAmount={setAmount} count={count} />
       </AmountBox>
       <ProductPriceBox>
-        <ProductTotalPrice>
-          {`${(amount * price).toLocaleString('ko-KR')}원`}
-        </ProductTotalPrice>
-        <ProductOrderButton onClick={() => alert('기능 구현 중입니다.')}>
-          주문하기
-        </ProductOrderButton>
+        {!stock ? (
+          <>
+            <StyledSoldout>품절</StyledSoldout>
+            <SoldoutButton>주문하기</SoldoutButton>
+          </>
+        ) : (
+          <>
+            <ProductTotalPrice>
+              {`${(amount * price).toLocaleString('ko-KR')}원`}
+            </ProductTotalPrice>
+            <ProductOrderButton onClick={() => alert('기능 구현 중입니다.')}>
+              주문하기
+            </ProductOrderButton>
+          </>
+        )}
       </ProductPriceBox>
       <ProductDeleteFromShoppingCartButton
         onClick={handleProductDeleteFromShoppingCart}

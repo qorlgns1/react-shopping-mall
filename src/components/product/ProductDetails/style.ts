@@ -96,6 +96,16 @@ export const TotalOrderCount = styled.span`
   font-size: 18px;
   line-height: 23px;
   color: #767676;
+
+  &:after {
+    content: '|';
+    margin: 0 12px;
+    display: inline-block;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 23px;
+    color: #c4c4c4;
+  }
 `;
 
 export const EmphasizeCount = styled.em`
@@ -109,16 +119,6 @@ export const TotalOrderPrice = styled.span`
   line-height: 45px;
   color: #21bf48;
 
-  &:before {
-    content: '|';
-    margin: 0 12px;
-    display: inline-block;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 23px;
-    color: #c4c4c4;
-  }
-
   &:after {
     content: '원';
     font-weight: 400;
@@ -126,6 +126,13 @@ export const TotalOrderPrice = styled.span`
     line-height: 23px;
     margin-left: 2px;
   }
+`;
+
+export const Soldout = styled.span`
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 45px;
+  color: red;
 `;
 
 export const BuyButtonWrapper = styled.div`

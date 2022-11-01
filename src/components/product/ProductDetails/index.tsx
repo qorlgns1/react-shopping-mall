@@ -15,6 +15,7 @@ import {
   ProductInfoWrapper,
   ProductName,
   ProductPrice,
+  Soldout,
   StoreName,
   TotalOrderCount,
   TotalOrderPrice,
@@ -22,8 +23,15 @@ import {
   Wrapper,
 } from './style';
 import { successToast } from '../../../utils/toast';
+import { useHistory } from 'react-router-dom';
 
 export default function ProductDetails({ productInfo }: any) {
+  const history = useHistory();
+
+  if (!productInfo) {
+    history.push('/');
+  }
+
   const {
     product_id,
     image,
@@ -96,9 +104,13 @@ export default function ProductDetails({ productInfo }: any) {
           <TotalOrderCount>
             총 수량 <EmphasizeCount>{amount}</EmphasizeCount>개
           </TotalOrderCount>
-          <TotalOrderPrice>
-            {(amount * price).toLocaleString('ko-KR')}
-          </TotalOrderPrice>
+          {!stock ? (
+            <Soldout>품절</Soldout>
+          ) : (
+            <TotalOrderPrice>
+              {(amount * price).toLocaleString('ko-KR')}
+            </TotalOrderPrice>
+          )}
         </PriceInfoWrapper>
         <BuyButtonWrapper>
           <BuyNowButton>바로구매</BuyNowButton>

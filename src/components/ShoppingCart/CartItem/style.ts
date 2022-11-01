@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import deleteIcon from '../../../assets/icon/icon-delete.svg';
+import { Soldout } from '../../product/ProductDetails/style';
 
 export const Wrapper = styled.li`
   position: relative;
@@ -98,4 +99,15 @@ export const ProductDeleteFromShoppingCartButton = styled.button`
   position: absolute;
   right: 18px;
   top: 18px;
+`;
+
+export const StyledSoldout = styled(Soldout)`
+  margin: 56px 0 26px 0;
+  font-size: 18px;
+  line-height: 23px;
+`;
+
+export const SoldoutButton = styled(ProductOrderButton)`
+  background-color: #f2f2f2;
+  cursor: initial;
 `;
