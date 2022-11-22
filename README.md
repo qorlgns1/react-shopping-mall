@@ -83,9 +83,52 @@
 2. React-query에 대한 학습과 도입
 
 - 현재 recoil을 가지고 상태관리 하고 있는데 react-query를 도입할것인가?
+
   - react-query를 이용하면 캐싱과 무한스크롤 등을 쉽게 구현할 수 있다.  
     react-query로 서버의 상태와 클라이언트의 상태관리를 할 수 있다고 보았는데, 그럼 recoil을 사용하지말고 react-query만 사용해야 하는 것인가?
   - 우선 recoil의 편리한 상태관리를 사용하면서 부가적인 기능을 사용하기 위해 react-query도 사용해보자. 둘 다 사용해보다보면 답이 나오겠지..!
+  - 현재 react-query, recoil을 사용하고 있는데, 불필요한 라이브러리의 사용을 걷어내고 싶어졌다.
+
+    - react-query를 사용해서 클라이언트의 상태관리를 어떻게 하는지 알아보자.
+
+      ```jax
+      const queryClient = useQueryClient();
+
+      // 이벤트가 있다고 가정
+      const handleClick = () => queryClient.setQueryData('username', username);
+
+      // 클라이언트 상태를 사용하는 곳에서의 코드
+      // 1. sync
+      const { data: username } = useQuery('username', {
+        initialData: '',
+        staleTime: Infinity,
+      });
+
+      // 2. async
+      const { data: username } = useQuery('username', () => '', {
+        staleTime: Infinity,
+      });
+
+      // 그런데 뭔가 코드가 길어지는것 같고, 사용성이 별로여보인다. 그럼 커스텀훅을 만들어서 사용할 수 있다.
+
+      export const useSetClientState = (key) => {
+        const queryClient = useQueryClient();
+        return (state) => queryClient.setQueryData(key, state);
+      };
+
+      export const useClientValue = (key, initialData) =>
+        useQuery(key, {
+          initialData,
+          staleTime: Infinity,
+        }).data;
+
+      ```
+
+  - 만약 프로젝트 규모가 엄청커져서 키값이 동일한 상태로 사용을 해버린다면 어떻게 될건가 고민이 되었다.
+    - recoil의 경우 Duplicate atom key의 에러가 보였지만 프로젝트 자체는 작동하였다.
+    - react-query의 경우 에러메시지가 나오지않고, 마지막에 같은 키값으로 입력된 데이터가 모든 상태에 출력되었다.
+      > 결과적으로 만약 프로젝트가 커진다면 리액트쿼리 자체만으로 클라이언트 상태관리 하는게 쉽지 않을 수 있겠다고 생각했다.
+  - 그렇다면 지금처럼 recoil로 클라이언트 상태관리를 하고, react-query로 서버상태를 관리하는것이 괜찮겠다고 생각이 들었다.
 
 3. 회원가입할 때 휴대폰번호 앞자리를 입력받는 셀렉트박스 구현
 
