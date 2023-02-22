@@ -1,27 +1,28 @@
+import { Product, ProductInfo } from '../types/product/product.type';
 import { axiosInstance } from './index';
 
-export const axiosGetProducts = async (pageParam = 1) => {
-  try {
-    const { data } = await axiosInstance.get(`/products?page=${pageParam}`);
+interface InfinityScrollProductData {
+  results: Product[];
+  nextPage: number | null;
+  isLast: boolean;
+}
 
-    // next: 다음 페이지 url
-    const { results, next } = data;
-    console.log(results);
+export const axiosGetProducts = async (
+  pageParam = 1,
+): Promise<InfinityScrollProductData> => {
+  const { data } = await axiosInstance.get<ProductInfo>(
+    `/products?page=${pageParam}`,
+  );
 
-    return next
-      ? { results, nextPage: ++pageParam, isLast: false }
-      : { results, nextPage: null, isLast: true };
-  } catch (error) {
-    console.error('axiosGetProducts error', error);
-  }
+  // next: 다음 페이지 url
+  const { results, next } = data;
+
+  return next
+    ? { results, nextPage: ++pageParam, isLast: false }
+    : { results, nextPage: null, isLast: true };
 };
 
 export const axiosGetProduct = async (productId: number) => {
-  try {
-    const { data } = await axiosInstance.get(`/products/${productId}`);
-
-    return data;
-  } catch (error) {
-    console.error('axiosGetProducts error', error);
-  }
+  const { data } = await axiosInstance.get<Product>(`/products/${productId}`);
+  return data;
 };
