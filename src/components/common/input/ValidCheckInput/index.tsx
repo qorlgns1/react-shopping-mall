@@ -6,8 +6,8 @@ interface Props {
   label: string;
   id: string;
   type?: string;
-  onClick: (e: any) => void;
-  onChange: (e: any) => void;
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   register: UseFormRegister<any>;
 }
 

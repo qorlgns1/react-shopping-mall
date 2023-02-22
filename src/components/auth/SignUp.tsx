@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
@@ -24,6 +24,20 @@ import {
 } from './style';
 import { LoginType } from '../../types/login/login.type';
 
+interface BuyerForm {
+  id: string;
+  name: string;
+  pw: string;
+  pwCheck: string;
+  phoneNumberMiddle?: string;
+  phoneNumberLast?: string;
+}
+
+interface SellerForm extends BuyerForm {
+  companyRegistrationNumber: string;
+  storeName: string;
+}
+
 export interface JoinFormType {
   type: LoginType;
   id: string;
@@ -40,23 +54,25 @@ export interface JoinFormType {
   storeName?: string;
 }
 
+const defaultLoginForm: JoinFormType = {
+  type: 'BUYER',
+  id: '',
+  idValidCheck: false,
+  pw: '',
+  pwCheck: '',
+  pwSameCheck: false,
+  name: '',
+  phoneNumber: '010',
+  phoneNumberMiddle: '',
+  phoneNumberLast: '',
+  companyRegistrationNumber: '',
+  companyRegistrationNumberValidCheck: false,
+  storeName: '',
+};
+
 export default function SignUp() {
   const history = useHistory();
-  const [joinInfo, setJoinInfo] = useState<JoinFormType>({
-    type: 'BUYER',
-    id: '',
-    idValidCheck: false,
-    pw: '',
-    pwCheck: '',
-    pwSameCheck: false,
-    name: '',
-    phoneNumber: '010',
-    phoneNumberMiddle: '',
-    phoneNumberLast: '',
-    companyRegistrationNumber: '',
-    companyRegistrationNumberValidCheck: false,
-    storeName: '',
-  });
+  const [joinInfo, setJoinInfo] = useState<JoinFormType>(defaultLoginForm);
 
   const joinPhoneNumber = useRecoilValue(joinPhoneNumberAtom);
 
@@ -69,16 +85,15 @@ export default function SignUp() {
     formState: { errors },
   } = useForm<JoinFormType>();
 
-  // 구매회원가입 | 판매회원가입 타입 정하는 함수
-  const handleTypeClick = (e: any) => {
-    e.preventDefault();
+  const termRef = useRef<HTMLInputElement>(null);
 
-    const type = e.target.name;
-    setJoinInfo((prev) => ({ ...prev, type }));
+  // 구매회원가입 | 판매회원가입 타입 정하는 함수
+  const handleSetSignUpType = (signUpType: LoginType) => () => {
+    setJoinInfo((prev) => ({ ...prev, type: signUpType }));
   };
 
   // 아이디 유효성 검사하는 함수
-  const idCheck = async (e: any) => {
+  const idCheck = async () => {
     const id = watch('id');
 
     if (!id) {
@@ -98,7 +113,7 @@ export default function SignUp() {
   };
 
   // 사업자번호 유효성 검사하는 함수
-  const handleCompanyRegistrationNumberCheck = async (e: any) => {
+  const handleCompanyRegistrationNumberCheck = async () => {
     const companyRegistrationNumber = watch('companyRegistrationNumber');
 
     if (!companyRegistrationNumber) {
@@ -157,7 +172,7 @@ export default function SignUp() {
   };
 
   // 비밀번호와 비밀번호확인이 일치하는지 확인하는 함수
-  const handlePwValidCheckSame = (e: ChangeEvent<HTMLInputElement>) => {
+  const handlePwValidCheckSame = () => {
     const pw: string = (document.getElementById('pw') as HTMLInputElement)
       .value;
     const pwCheck: string = (
@@ -174,12 +189,10 @@ export default function SignUp() {
   };
 
   // 회원가입하는 함수
-  const handleJoin = async (formData: any) => {
-    debugger;
+  const handleJoin = async (formData: BuyerForm | SellerForm) => {
     const { id, pw, pwCheck, name } = formData;
-    const termsState = (document.getElementById('terms') as HTMLInputElement)
-      .checked;
-    if (!termsState) {
+    const $term = termRef.current;
+    if ($term && !$term.checked) {
       alert('약관에 동의를 먼저 해주세요.');
       return;
     }
@@ -195,7 +208,7 @@ export default function SignUp() {
       clearErrors('phoneNumber');
     }
 
-    interface IuserInfo {
+    interface UserInfo {
       username: string;
       password: string;
       password2: string;
@@ -205,7 +218,7 @@ export default function SignUp() {
       store_name?: string;
     }
 
-    let userInfo: IuserInfo = {
+    let userInfo: UserInfo = {
       username: id,
       password: pw,
       password2: pwCheck,
@@ -213,7 +226,14 @@ export default function SignUp() {
       name,
     };
 
-    if (joinInfo.type === 'SELLER') {
+    const joinTypeCheck = (
+      joinInfoType: JoinFormType['type'],
+      formData: BuyerForm | SellerForm,
+    ): formData is SellerForm => {
+      return joinInfoType === 'SELLER';
+    };
+
+    if (joinTypeCheck(joinInfo.type, formData)) {
       const { companyRegistrationNumber, storeName } = formData;
 
       userInfo = {
@@ -243,12 +263,14 @@ export default function SignUp() {
     <Wrapper>
       <h2 className='ir'>회원가입</h2>
       <Form onSubmit={handleSubmit(handleJoin)}>
-        <TypeSelectList type={joinInfo.type} onClick={handleTypeClick}>
+        <TypeSelectList type={joinInfo.type}>
           <li>
-            <button name='BUYER'>구매회원가입</button>
+            <button onClick={handleSetSignUpType('BUYER')}>구매회원가입</button>
           </li>
           <li>
-            <button name='SELLER'>판매회원가입</button>
+            <button onClick={handleSetSignUpType('SELLER')}>
+              판매회원가입
+            </button>
           </li>
         </TypeSelectList>
         <InputWrapper>
@@ -323,7 +345,7 @@ export default function SignUp() {
           )}
         </InputWrapper>
         <TermsLabel htmlFor='terms'>
-          <input type='checkbox' id='terms' />
+          <input type='checkbox' id='terms' ref={termRef} />
           <span>
             호두샵의<ImportantWord>이용약관</ImportantWord> 및
             <ImportantWord>개인정보처리방침</ImportantWord>에 대한 내용을
