@@ -1,4 +1,9 @@
 import { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { useForm } from 'react-hook-form';
+
+import MainLogo from '../../components/common/logo/MainLogo/index';
 import {
   CheckedLoginButton,
   ErrorMessageBox,
@@ -10,13 +15,11 @@ import {
   LoginSubWrapper,
   Wrapper,
 } from './style';
-import MainLogo from '../../components/common/logo/MainLogo/index';
-import { useForm } from 'react-hook-form';
+
 import { axiosLogin } from '../../apis/loginApi';
-import { Link, useHistory } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
 import { isLogin } from '../../atoms';
 import { successToast } from '../../utils/toast/index';
+import { LoginType } from '../../types/login/login.type';
 
 export default function LoginPage() {
   const history = useHistory();
@@ -27,7 +30,7 @@ export default function LoginPage() {
     watch,
     formState: { errors },
   } = useForm();
-  const [loginType, setLoginType] = useState('BUYER');
+  const [loginType, setLoginType] = useState<LoginType>('BUYER');
   const [loginResult, setLoginResult] = useState(true);
 
   const onSubmit = async (userInfo: any) => {

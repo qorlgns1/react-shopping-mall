@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { LoginType } from '../../types/login/login.type';
 
 export const Wrapper = styled.section`
   margin-top: 70px;
@@ -13,11 +14,7 @@ export const Form = styled.form`
   border-bottom-right-radius: 10px;
 `;
 
-export interface TypeSelectListProps {
-  type: 'BUYER' | 'SELLER';
-}
-
-export const TypeSelectList = styled.ul<TypeSelectListProps>`
+export const TypeSelectList = styled.ul<{ type: LoginType }>`
   display: flex;
   width: 100%;
 

@@ -22,9 +22,10 @@ import {
   TypeSelectList,
   Wrapper,
 } from './style';
+import { LoginType } from '../../types/login/login.type';
 
 export interface JoinFormType {
-  type: 'BUYER' | 'SELLER';
+  type: LoginType;
   id: string;
   idValidCheck: boolean;
   pw: string;
