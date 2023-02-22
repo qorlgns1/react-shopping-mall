@@ -64,6 +64,10 @@ export default function LoginPage() {
     }
   }
 
+  const selectLoginType = (loginType: LoginType) => () => {
+    setLoginType(loginType);
+  };
+
   if (isMemberLoginInfo) {
     history.push('/');
   }
@@ -78,12 +82,12 @@ export default function LoginPage() {
           {loginType === 'SELLER' ? (
             <CheckedLoginButton
               type='button'
-              onClick={() => setLoginType('BUYER')}
+              onClick={selectLoginType('BUYER')}
             >
               구매회원 로그인
             </CheckedLoginButton>
           ) : (
-            <button type='button' onClick={() => setLoginType('BUYER')}>
+            <button type='button' onClick={selectLoginType('BUYER')}>
               구매회원 로그인
             </button>
           )}
@@ -92,12 +96,12 @@ export default function LoginPage() {
           {loginType === 'BUYER' ? (
             <CheckedLoginButton
               type='button'
-              onClick={() => setLoginType('SELLER')}
+              onClick={selectLoginType('SELLER')}
             >
               판매회원 로그인
             </CheckedLoginButton>
           ) : (
-            <button type='button' onClick={() => setLoginType('SELLER')}>
+            <button type='button' onClick={selectLoginType('SELLER')}>
               판매회원 로그인
             </button>
           )}
