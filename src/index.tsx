@@ -1,8 +1,10 @@
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import App from './App';
 import { RecoilRoot } from 'recoil';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+
+import App from './App';
 import { AppFixedWrap, GlobalStyle, StyledToastContainer } from './style';
 
 const queryClient = new QueryClient();
@@ -15,14 +17,15 @@ root.render(
   <>
     <GlobalStyle />
     <BrowserRouter>
-      <QueryClientProvider client={queryClient}>
-        <RecoilRoot>
+      <RecoilRoot>
+        <QueryClientProvider client={queryClient}>
           <AppFixedWrap>
             <App />
             <StyledToastContainer />
           </AppFixedWrap>
-        </RecoilRoot>
-      </QueryClientProvider>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+      </RecoilRoot>
     </BrowserRouter>
   </>,
 );
