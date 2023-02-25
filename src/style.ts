@@ -17,24 +17,28 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Spoqa Han Sans Neo';
   }
 
-  body {
+  html {
     font-size: 10px;
   }
+
   img {
     width: 100%;
     height: auto;
   }
+
   button {
     border: none;
     cursor: pointer;
     padding: 0;
     background-color: inherit;
   }
+
   input {
     &:focus {
       outline:none;
     }
   }
+  
   textarea {
     border: none;
     overflow: auto;
