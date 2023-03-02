@@ -3,11 +3,11 @@ import { UseFormRegister } from 'react-hook-form';
 import { useSetRecoilState } from 'recoil';
 import { joinPhoneNumberAtom } from '../../../../atoms';
 import {
-  Input,
   Label,
   PhoneNumberWrapper,
   SelectBox,
   SelectBoxList,
+  StyledBasicInput,
   Wrapper,
 } from './style';
 
@@ -28,7 +28,7 @@ export default function PhoneInput({
 }: Props) {
   const setJoinPhoneNumber = useSetRecoilState(joinPhoneNumberAtom);
   const [selectBoxClicked, setSelectBoxClicked] = useState(false);
-  const selectBoxRef = useRef<any>(null);
+  const selectBoxRef = useRef<HTMLButtonElement>(null);
 
   const selectBoxClick = () => {
     const root = document.querySelector('#root');
@@ -54,7 +54,10 @@ export default function PhoneInput({
         return [event.target.textContent, ...rest]; // 휴대폰번호 맨앞 저장
       });
 
-      selectBoxRef.current.textContent = event.target.textContent;
+      if (selectBoxRef.current) {
+        selectBoxRef.current.textContent = event.target.textContent;
+      }
+
       setSelectBoxClicked((prev) => !prev);
     }
   };
@@ -96,23 +99,13 @@ export default function PhoneInput({
           selectBoxClicked={selectBoxClicked}
           onClick={selectBoxListClick}
         >
-          <li>
-            <button type='button'>010</button>
-          </li>
-          <li>
-            <button type='button'>011</button>
-          </li>
-          <li>
-            <button type='button'>016</button>
-          </li>
-          <li>
-            <button type='button'>017</button>
-          </li>
-          <li>
-            <button type='button'>019</button>
-          </li>
+          {['010', '011', '016', '017', '019'].map((prefixNumber) => (
+            <li>
+              <button type='button'>{prefixNumber}</button>
+            </li>
+          ))}
         </SelectBoxList>
-        <Input
+        <StyledBasicInput
           type={type}
           id={`${id}Middle`}
           {...register(`${id}Middle`, {
@@ -123,7 +116,7 @@ export default function PhoneInput({
           })}
           onChange={handleChange}
         />
-        <Input
+        <StyledBasicInput
           type={type}
           id={`${id}Last`}
           {...register(`${id}Last`, {
