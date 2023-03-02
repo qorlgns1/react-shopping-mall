@@ -142,3 +142,12 @@
   4. 3번을 한 결과 외부에서 버튼을 누르면 ul태그를 닫을 수 있었다.
   5. ul 태그에 있는 하나의 li를 클릭할때도 해결을 해줘야했다.
   6. 5번은 이벤트흐름은 버블링이 우선적으로 발생되니까 ul태그를 중 하나의 li를 클릭하면 `event.stopPropagation()` 을 이용해 root의 이벤트 실행을 막았다. 그결과 한번만 생성되는 root의 이벤트는 이벤트 전파를 막았기때문에 실행이 되지않고 이벤트를 제거시킬 수 있었다.
+
+4. 컴포넌트에 대한 분리
+
+- 기존에 하나의 컴포넌트에 함수, styled-components가 묶여있었다.  
+  사용하다보니 가독성이 떨어지는게 느껴졌고, 그래서 선택한것이 컴포넌트를 만들 때 폴더를 만들고, 폴더에 index.tsx파일과 style.ts 파일로 분리해서 컴포넌트와, styled-components를 분리해서 사용했다.  
+  style 파일에서 export를 하고 필요한곳에서 import를 해서 사용할 수 있게 했다.  
+   그런데, Wrapper같은 styled-components를 import해서 사용하다보니, 많은 컴포넌트에서 Wrapper 컴포넌트 이름이 존재하다보니 import할 때 Wrapper라는 컴포넌트가 너무 많아서 불편함을 느꼈다.
+  - 해결방법
+    - style 파일에서 export default로 객체를 내보내고, 그것을 S라는 이름으로 import해서 S.wrapper 이런식으로 시도해본다.
