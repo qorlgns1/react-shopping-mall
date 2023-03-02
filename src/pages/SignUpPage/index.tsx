@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import MainLogo from '../../components/common/logo/MainLogo';
 import { Wrapper } from './style';
 
-import SignUp from '../../components/sign/SignUp';
+import SignUp from '@components/sign/SignUp';
 
 const SignUpPage = () => {
   useEffect(() => {
