@@ -151,3 +151,16 @@
    그런데, Wrapper같은 styled-components를 import해서 사용하다보니, 많은 컴포넌트에서 Wrapper 컴포넌트 이름이 존재하다보니 import할 때 Wrapper라는 컴포넌트가 너무 많아서 불편함을 느꼈다.
   - 해결방법
     - style 파일에서 export default로 객체를 내보내고, 그것을 S라는 이름으로 import해서 S.wrapper 이런식으로 시도해본다.
+
+## 문제 해결 기록
+
+1. vercel에 배포시 컴포넌트를 찾을 수 없다는 에러 발생  
+   확인해보니 폴더명을 변경했었는데, git은 파일명 또는 폴더명의 대소문자를 구분하지 못한다는 것을 알게 되었고, 새롭게 변경된 폴더명이 github에 올라간게 아니라, 변경되기 전 폴더명이 올라가 있는것을 확인
+
+- 해결방법
+  - 대소문자 무시하지 말라고 옵션주기
+    - git config core.ignorecase false
+  - 캐싱 삭제
+    - git rm -r --cached .
+    - git add .
+    - git commit -m 커밋메시지
