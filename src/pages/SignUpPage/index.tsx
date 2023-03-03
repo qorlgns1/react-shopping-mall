@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import MainLogo from '../../components/common/logo/MainLogo';
 import { Wrapper } from './style';
 
-import SignUp from '../../components/auth/SignUp';
+import SignUp from '../../components/sign/SignUp';
 
-export default function JoinPage() {
+const SignUpPage = () => {
   useEffect(() => {
     const titleElement = document.getElementsByTagName('title')[0];
     titleElement.innerHTML = `회원가입 | 호두마켓`;
@@ -19,4 +19,6 @@ export default function JoinPage() {
       <SignUp />
     </Wrapper>
   );
-}
+};
+
+export default SignUpPage;

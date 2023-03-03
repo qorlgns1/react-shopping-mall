@@ -4,15 +4,15 @@ import MovePageNavItem from '../MovePageNavItem/index';
 import cartIcon from '../../../../assets/icon/icon-shopping-cart.svg';
 import userIcon from '../../../../assets/icon/icon-user.svg';
 import { useRecoilState } from 'recoil';
-import { isLogin } from '../../../../atoms';
+import { userLoginInfoAtom } from '../../../../atoms';
 import { successToast } from '../../../../utils/toast/index';
 
 export default function Navbar() {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
-  const [isMemberLogin, setIsMemberLogin] = useRecoilState(isLogin);
+  const [userLoginInfo, setUserLoginInfo] = useRecoilState(userLoginInfoAtom);
 
   const handleLogout = () => {
-    setIsMemberLogin(false);
+    setUserLoginInfo(null);
     successToast('로그아웃 되었습니다.');
   };
 
@@ -52,7 +52,7 @@ export default function Navbar() {
             />
           </li>
           <li>
-            {!isMemberLogin ? (
+            {!userLoginInfo ? (
               <MovePageNavItem to='/login' title='로그인' logo={userIcon} />
             ) : (
               <MovePageNavItem

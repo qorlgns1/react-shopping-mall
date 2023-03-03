@@ -1,49 +1,29 @@
+import { BuyerSignUpInfo, SellerSignUpInfo } from '../types/sign/signUp.type';
 import { axiosInstance } from './index';
 
 export const axiosIdCheck = async (id: string) => {
-  try {
-    const { data } = await axiosInstance.post(
-      `/accounts/signup/valid/username/`,
-      {
-        username: id,
-      },
-    );
+  const { data } = await axiosInstance.post(
+    `/accounts/signup/valid/username/`,
+    {
+      username: id,
+    },
+  );
 
-    const successMessage = data?.Success;
-
-    return [successMessage, true];
-  } catch (error: any) {
-    // console.error('axiosIdCheck error', error);
-    // console.error(error?.response?.data);
-
-    const { FAIL_Message } = error?.response?.data;
-
-    return [FAIL_Message, false];
-  }
+  return data;
 };
 
 export const axiosCompanyRegistrationNumberCheck = async (
   companyRegistrationNumber: string,
 ) => {
-  try {
-    const { data } = await axiosInstance.post(
-      `/accounts/signup/valid/company_registration_number/`,
-      {
-        company_registration_number: companyRegistrationNumber,
-      },
-    );
+  const { data } = await axiosInstance.post(
+    `/accounts/signup/valid/company_registration_number/`,
+    {
+      company_registration_number: companyRegistrationNumber,
+    },
+  );
 
-    const successMessage = data?.Success;
-
-    return [successMessage, true];
-  } catch (error: any) {
-    // console.error('axiosIdCheck error', error);
-    // console.error(error?.response?.data);
-
-    const { FAIL_Message } = error?.response?.data;
-
-    return [FAIL_Message, false];
-  }
+  const successMessage = data?.Success;
+  return successMessage;
 };
 
 export const axiosJoin = async (userInfo: object, type?: string) => {
@@ -62,4 +42,12 @@ export const axiosJoin = async (userInfo: object, type?: string) => {
 
     return [errorMessage, false];
   }
+};
+
+export const axiosBuyerSignUp = async (userInfo: BuyerSignUpInfo) => {
+  return await axiosInstance.post(`/accounts/signup/`, userInfo);
+};
+
+export const axiosSellerSignUp = async (userInfo: SellerSignUpInfo) => {
+  return await axiosInstance.post(`/accounts/signup/`, userInfo);
 };

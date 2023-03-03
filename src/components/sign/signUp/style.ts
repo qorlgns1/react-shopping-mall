@@ -1,12 +1,13 @@
 import styled, { css } from 'styled-components';
-import { LoginType } from '../../types/login/login.type';
+import { SignType } from '../../../types/sign/sign.type';
+import Button from '../../common/button/Button';
 
-export const Wrapper = styled.section`
+const Wrapper = styled.section`
   margin-top: 70px;
   width: 100%;
 `;
 
-export const Form = styled.form`
+const Form = styled.form`
   display: flex;
   flex-direction: column;
   border-top: 0;
@@ -14,7 +15,7 @@ export const Form = styled.form`
   border-bottom-right-radius: 10px;
 `;
 
-export const TypeSelectList = styled.ul<{ type: LoginType }>`
+const TypeSelectList = styled.ul<{ type: SignType }>`
   display: flex;
   width: 100%;
 
@@ -50,18 +51,19 @@ export const TypeSelectList = styled.ul<{ type: LoginType }>`
     `}
 `;
 
-export const InputWrapper = styled.div`
+const InputWrapper = styled.div`
   padding: 35px;
   margin-bottom: 34px;
   display: flex;
   flex-direction: column;
+  gap: 1.6rem;
   border: 1px solid #c4c4c4;
   border-top: 0;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 `;
 
-export const TermsLabel = styled.label`
+const TermsLabel = styled.label`
   margin: 0 35px;
   font-weight: 400;
   font-size: 16px;
@@ -76,28 +78,34 @@ export const TermsLabel = styled.label`
   }
 `;
 
-export const ImportantWord = styled.span`
-  font-weight: bold;
-  text-decoration: underline;
-  margin-left: 4px;
+const LoginSubmitButton = styled(Button)`
+  margin: 36px 35px 0;
 `;
 
-export const LoginSubmitButton = styled.button`
-  margin: 36px 35px 0;
-  padding: 19px 0;
-  background-color: #21bf48;
-  border-radius: 5px;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 22px;
-  color: #ffffff;
+const ValidCheckInputWrapper = styled.div`
+  display: flex;
+  gap: 1.2rem;
 
-  &:disabled,
-  &[disabled] {
-    background-color: #c4c4c4;
+  // input Wrapper
+  > div {
+    flex: 1;
+  }
 
-    &:hover {
-      cursor: not-allowed;
-    }
+  // valid check button
+  > button {
+    width: 12.2rem;
+    margin-top: 30px;
   }
 `;
+
+const signUpStyle = {
+  Wrapper,
+  Form,
+  TypeSelectList,
+  InputWrapper,
+  TermsLabel,
+  LoginSubmitButton,
+  ValidCheckInputWrapper,
+};
+
+export default signUpStyle;

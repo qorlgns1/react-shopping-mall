@@ -39,9 +39,11 @@ const TypeSelectList = styled.ul<{ type: SignType }>`
     width: 100%;
     border: 1px solid #c4c4c4;
     border-bottom: 0;
-    border-radius: 10px 10px 0 0;
+    border-radius: 1rem 1rem 0 0;
     text-align: center;
-    height: 60px;
+    height: 6rem;
+    font-size: 1.8rem;
+    font-weight: 500;
   }
 
   ${({ type }) => setUnSelectedButtonCss(type)}

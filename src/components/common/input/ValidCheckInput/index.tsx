@@ -8,13 +8,14 @@ import iconCheckOff from '@assets/icon/icon-check-off.svg';
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => boolean;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => any;
 }
 
 type InputRef = HTMLInputElement;
 
 const ValidCheckInput = forwardRef<InputRef, Props>(
   ({ onChange, ...props }, ref) => {
+    // TODO: checked를 props로 받아서 유효성이 통과되었는지 확인하고 표시해줘야한다.
     const [checkboxChecked, setCheckboxChecked] = useState(false);
 
     return (
@@ -45,10 +46,6 @@ const Wrapper = styled.div`
 const CheckBoxWrapper = styled.div``;
 
 const CheckBox = styled.input`
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  align-items: center;
   display: none;
 
   &:checked + label {
